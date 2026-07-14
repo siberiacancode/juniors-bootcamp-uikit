@@ -1,8 +1,39 @@
 {
-  "name": "juniors-bootcamp-uikit",
-  "private": true,
+  "name": "@siberiacancode/uikit",
   "version": "0.0.0",
-  "type": "module",
+  "description": "UI-kit for juniorsbootcamp",
+  "author": {
+    "name": "SIBERIA CAN CODE 🧊",
+    "url": "https://github.com/siberiacancode"
+  },
+  "homepage": "https://github.com/siberiacancode/juniors-bootcamp-uikit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siberiacancode/juniors-bootcamp-uikit"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./styles/*": "./dist/styles/*"
+  },
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "pnpm unit-test run && pnpm build",
     "build": "shx rm -rf dist && vite build",
