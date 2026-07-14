@@ -1,0 +1,101 @@
+.iconButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid transparent;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.iconButton:focus-visible {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
+}
+
+.iconButton:disabled {
+  pointer-events: none;
+}
+
+.iconButton :global(svg) {
+  pointer-events: none;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.primary:hover {
+  background: var(--primary-hover);
+}
+.primary:disabled {
+  background: var(--primary);
+  opacity: 0.2;
+}
+
+.secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+.secondary:hover {
+  background: var(--secondary-hover);
+}
+.secondary:disabled {
+  background: var(--secondary);
+  opacity: 0.7;
+}
+
+.outline {
+  background: var(--secondary);
+  border-color: var(--ring);
+  color: var(--foreground);
+}
+.outline:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: -2px 2px 0 0 var(--accent-secondary);
+}
+.outline:disabled {
+  border-color: var(--border-hard);
+  box-shadow: none;
+  opacity: 0.2;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--foreground);
+}
+.ghost:hover {
+  background: var(--secondary);
+}
+.ghost:disabled {
+  opacity: 0.4;
+}
+
+.sm {
+  width: 32px;
+  height: 32px;
+}
+.md {
+  width: 40px;
+  height: 40px;
+}
+.lg {
+  width: 52px;
+  height: 52px;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+.round {
+  border-radius: 9999px;
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pnpm unit-test || exit 1
