@@ -1,0 +1,50 @@
+{
+  "name": "juniors-bootcamp-uikit",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "pnpm unit-test run && pnpm build",
+    "build": "shx rm -rf dist && vite build",
+    "build:js": "tsc --project tsconfig.build.json && pnpm prettier --write src/bundle",
+    "lint": "eslint . --fix",
+    "lint-inspector": "npx @eslint/config-inspector@latest",
+    "format": "prettier --write .",
+    "type": "tsc --noEmit",
+    "pretty": "pnpm lint && pnpm format",
+    "unit-test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@fontsource-variable/nunito": "^5.2.7",
+    "@siberiacancode/reactuse": "^1.0.10",
+    "radix-ui": "^1.6.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@siberiacancode/eslint": "^2.18.0",
+    "@siberiacancode/prettier": "^1.8.0",
+    "@siberiacancode/vitest": "^2.4.1",
+    "@storybook/addon-a11y": "^10.5.0",
+    "@storybook/addon-docs": "^10.5.0",
+    "@storybook/addon-vitest": "^10.5.0",
+    "@storybook/react-vite": "^10.5.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "globals": "^17.7.0",
+    "storybook": "^10.5.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.62.0",
+    "unplugin-dts": "^1.0.3",
+    "vite": "^8.1.1",
+    "vite-plugin-externalize-deps": "^0.10.0",
+    "vite-plugin-react-remove-attributes": "^1.0.3",
+    "vitest": "^4.1.10"
+  }
+}
