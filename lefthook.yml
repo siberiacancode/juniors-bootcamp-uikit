@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "src/**/*.{js,ts,tsx}"
+      run: pnpm run type && sh .lefthook/lint {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    branch-prefix:
+      run: sh .lefthook/commit-msg {1}
