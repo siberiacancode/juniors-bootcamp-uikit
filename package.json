@@ -1,6 +1,7 @@
 {
   "name": "@siberiacancode/uikit",
   "version": "0.0.0",
+  "type": "module",
   "description": "UI-kit for juniorsbootcamp",
   "author": {
     "name": "SIBERIA CAN CODE 🧊",

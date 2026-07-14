@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react';
+import type { ComponentProps } from 'react';
 
 import { cn } from '@siberiacancode/reactuse';
 import { Slot } from 'radix-ui';
@@ -11,7 +11,6 @@ export type IconButtonShape = 'round' | 'rounded';
 
 interface IconButtonProps extends ComponentProps<'button'> {
   asChild?: boolean;
-  children: ReactNode;
   shape?: IconButtonShape;
   size?: IconButtonSize;
   variant?: IconButtonVariant;
