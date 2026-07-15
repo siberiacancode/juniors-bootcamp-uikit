@@ -1,0 +1,105 @@
+.chip {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: var(--secondary);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  letter-spacing: 0.015em;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--secondary-hover);
+}
+
+.chip:focus-visible {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
+}
+
+.chip:disabled {
+  pointer-events: none;
+  background: var(--secondary);
+  opacity: 0.3;
+}
+
+.chip :global(svg) {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.icon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip[data-state='on'] .icon {
+  display: flex;
+}
+
+.primary[data-state='on'] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.primary[data-state='on']:hover {
+  background: var(--primary-hover);
+}
+
+.accent[data-state='on'] {
+  background: var(--accent-primary);
+  color: var(--accent-foreground);
+}
+
+.accent[data-state='on']:hover {
+  background: var(--accent-primary-hover);
+}
+
+.md {
+  height: 52px;
+  min-width: 52px;
+  padding: 12px 32px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.md[data-state='on'] {
+  padding: 12px 18px;
+}
+
+.md :global(svg) {
+  width: 20px;
+  height: 20px;
+}
+
+.sm {
+  height: 32px;
+  min-width: 32px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.sm[data-state='on'] {
+  font-weight: 700;
+}
+
+.sm :global(svg) {
+  width: 16px;
+  height: 16px;
+}

@@ -15,8 +15,73 @@ const meta = preview.meta({
     size: 'md',
     shape: 'rounded',
     disabled: false,
+    'aria-label': 'Select area',
     children: BoxSelectIcon
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'ghost']
+    },
+    size: {
+      control: 'radio',
+      options: ['sm', 'md', 'lg']
+    },
+    shape: {
+      control: 'radio',
+      options: ['rounded', 'round']
+    },
+    disabled: {
+      control: 'boolean'
+    },
+    children: {
+      table: { disable: true }
+    },
+    asChild: {
+      table: { disable: true }
+    }
   }
 });
 
 export const Playground = meta.story({});
+
+const VARIANTS = ['primary', 'secondary', 'outline', 'ghost'] as const;
+const SIZES = ['lg', 'md', 'sm'] as const;
+const SHAPES = ['rounded', 'round'] as const;
+
+export const Matrix = meta.story({
+  parameters: {
+    layout: 'padded'
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+      {SHAPES.map((shape) => (
+        <div key={shape} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <div style={{ fontSize: 12, opacity: 0.5 }}>{shape}</div>
+          {SIZES.map((size) => (
+            <div key={size} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ fontSize: 12, opacity: 0.5 }}>{size}</div>
+              {VARIANTS.map((variant) => (
+                <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <div style={{ width: 90, fontSize: 12, opacity: 0.5 }}>{variant}</div>
+                  <IconButton aria-label='action' shape={shape} size={size} variant={variant}>
+                    {BoxSelectIcon}
+                  </IconButton>
+                  <IconButton
+                    disabled
+                    aria-label='action'
+                    shape={shape}
+                    size={size}
+                    variant={variant}
+                  >
+                    {BoxSelectIcon}
+                  </IconButton>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+});

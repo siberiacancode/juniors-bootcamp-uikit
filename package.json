@@ -52,6 +52,7 @@
   "dependencies": {
     "@fontsource-variable/nunito": "^5.2.7",
     "@siberiacancode/reactuse": "^1.0.10",
+    "lucide-react": "^1.24.0",
     "radix-ui": "^1.6.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
