@@ -181,9 +181,7 @@ const OverviewShowcase = () => (
         <Empty className={styles.empty_preview}>
           <CreditCardIcon aria-hidden='true' className={styles.empty_icon} />
           <EmptyTitle>Пока ничего нет</EmptyTitle>
-          <EmptyDescription>
-            Добавьте первую карту или выберите готовый компонент из витрины.
-          </EmptyDescription>
+          <EmptyDescription>Добавьте первую карту или выберите готовую.</EmptyDescription>
         </Empty>
       </section>
     </div>
