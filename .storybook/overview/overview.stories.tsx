@@ -1,6 +1,5 @@
 import { ArrowRightIcon, BellIcon, CreditCardIcon, SearchIcon, SparklesIcon } from 'lucide-react';
 
-import preview from '../../../.storybook/preview';
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -9,16 +8,17 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '../breadcrumb/breadcrumb';
-import { Button } from '../button/button';
-import { ChipGroup, ChipGroupItem } from '../chip-group/chip-group';
-import { Chip } from '../chip/chip';
-import { Empty, EmptyDescription, EmptyTitle } from '../empty/empty';
-import { GiantButton } from '../giant-button/giant-button';
-import { IconButton } from '../icon-button/icon-button';
-import { NewPaymentCard } from '../new-payment-card/new-payment-card';
-import { SavedPaymentCard } from '../saved-payment-card/saved-payment-card';
-import { Typography } from '../typography/typography';
+} from '../../src/components/breadcrumb/breadcrumb';
+import { Button } from '../../src/components/button/button';
+import { ChipGroup, ChipGroupItem } from '../../src/components/chip-group/chip-group';
+import { Chip } from '../../src/components/chip/chip';
+import { Empty, EmptyDescription, EmptyTitle } from '../../src/components/empty/empty';
+import { GiantButton } from '../../src/components/giant-button/giant-button';
+import { IconButton } from '../../src/components/icon-button/icon-button';
+import { NewPaymentCard } from '../../src/components/new-payment-card/new-payment-card';
+import { SavedPaymentCard } from '../../src/components/saved-payment-card/saved-payment-card';
+import { Typography } from '../../src/components/typography/typography';
+import preview from '../preview';
 
 import styles from './overview.module.css';
 
@@ -71,7 +71,7 @@ const OverviewShowcase = () => (
           </Typography>
         </div>
         <div className={styles.payment_cards}>
-          <NewPaymentCard aria-label='Add payment card' />
+          <NewPaymentCard aria-label='Add payment card'>Новая карта</NewPaymentCard>
           <SavedPaymentCard aria-label='Saved payment card' />
         </div>
       </section>
