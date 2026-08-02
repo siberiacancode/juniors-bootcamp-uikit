@@ -1,4 +1,5 @@
 import { defineMain } from '@storybook/react-vite/node';
+import { mergeConfig } from 'vite';
 
 export default defineMain({
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -7,5 +8,10 @@ export default defineMain({
   docs: {
     defaultName: 'juniorsbootcamp uikit',
     docsMode: true
+  },
+  viteFinal: async (config) => {
+    return mergeConfig(config, {
+      base: '/ui-kit/'
+    });
   }
 });

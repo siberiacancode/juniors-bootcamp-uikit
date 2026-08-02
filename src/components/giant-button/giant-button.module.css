@@ -1,81 +1,52 @@
-.giantButton {
+.giant_button {
   position: relative;
-  display: inline-flex;
-  min-height: 40px;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  outline: none;
-  isolation: isolate;
-}
-
-.giantButton:disabled {
-  pointer-events: none;
-  opacity: 0.2;
-}
-
-.shadow {
-  position: absolute;
-  z-index: 0;
-  top: 6px;
-  left: -6px;
   width: 100%;
-  height: 100%;
-  border: 2px solid var(--border-hard);
-  border-radius: 9999px;
-  background: var(--accent-primary);
-  transition:
-    transform 150ms ease,
-    border-color 150ms ease;
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  display: flex;
   height: 64px;
-  min-height: 40px;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 9999px;
-  background: var(--primary);
-  padding: 8px 24px;
-  color: var(--primary-foreground);
-  font-family: var(--font-sans);
   font-size: 32px;
   line-height: 48px;
-  font-weight: 700;
-  letter-spacing: 0.005em;
-  white-space: nowrap;
-  transition:
-    background-color 150ms ease,
-    transform 150ms ease;
+  animation: pulse-cta 2s ease-in-out infinite;
 }
 
-.giantButton:hover .shadow {
-  transform: translate(6px, 0);
-  border-color: var(--primary-hover);
+.giant_button::after {
+  content: '';
+  position: absolute;
+  z-index: -10;
+  inset: 0;
+  border: 2px solid var(--primary);
+  border-radius: inherit;
+  background: transparent;
+  transform: translate(-6px, 6px);
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    text-decoration-color,
+    fill,
+    stroke,
+    opacity,
+    box-shadow,
+    transform,
+    filter,
+    backdrop-filter;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.giantButton:hover .content {
-  background: var(--primary-hover);
+.giant_button:hover::after {
+  transform: translate(0, 0);
 }
 
-.giantButton:active .shadow {
-  transform: translate(4px, -2px);
+.giant_button:hover {
+  animation-play-state: paused;
 }
 
-.giantButton:focus-visible .content {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
-}
+@keyframes pulse-cta {
+  0%,
+  100% {
+    transform: scale(1);
+  }
 
-.giantButton :global(svg) {
-  pointer-events: none;
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  50% {
+    transform: scale(1.01);
+  }
 }

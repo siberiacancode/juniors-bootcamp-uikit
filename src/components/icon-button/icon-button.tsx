@@ -9,7 +9,7 @@ export type IconButtonVariant = 'ghost' | 'outline' | 'primary' | 'secondary';
 export type IconButtonSize = 'lg' | 'md' | 'sm';
 export type IconButtonShape = 'round' | 'rounded';
 
-interface IconButtonProps extends ComponentProps<'button'> {
+export interface IconButtonProps extends ComponentProps<'button'> {
   asChild?: boolean;
   shape?: IconButtonShape;
   size?: IconButtonSize;
@@ -27,7 +27,7 @@ export const IconButton = ({
   const Comp = asChild ? Slot.Root : 'button';
   return (
     <Comp
-      className={cn(styles.iconButton, styles[variant], styles[size], styles[shape], className)}
+      className={cn(styles.icon_button, styles[variant], styles[size], styles[shape], className)}
       data-shape={shape}
       data-size={size}
       data-slot='icon-button'

@@ -25,20 +25,20 @@ const useChipGroupContext = () => {
   return context;
 };
 
-interface ChipGroupBaseProps extends ComponentProps<'div'> {
+export interface ChipGroupBaseProps extends ComponentProps<'div'> {
   children?: ReactNode;
   disabled?: boolean;
   orientation?: ChipGroupOrientation;
 }
 
-interface ChipGroupSingleProps extends ChipGroupBaseProps {
+export interface ChipGroupSingleProps extends ChipGroupBaseProps {
   defaultValue?: string;
   type: 'single';
   value?: string;
   onValueChange?: (value: string) => void;
 }
 
-interface ChipGroupMultipleProps extends ChipGroupBaseProps {
+export interface ChipGroupMultipleProps extends ChipGroupBaseProps {
   defaultValue?: string[];
   type: 'multiple';
   value?: string[];
@@ -78,7 +78,7 @@ export const ChipGroup = ({
   return (
     <ChipGroupContext.Provider value={{ type, value: values, disabled, onItemToggle }}>
       <div
-        className={cn(styles.chipGroup, styles[orientation], className)}
+        className={cn(styles.chip_group, styles[orientation], className)}
         data-orientation={orientation}
         data-slot='chip-group'
         role={type === 'single' ? 'radiogroup' : 'toolbar'}
@@ -92,21 +92,17 @@ export interface ChipGroupItemProps extends ComponentProps<typeof Chip> {
   value: string;
 }
 
-export const ChipGroupItem = ({ value, disabled, ...props }: ChipGroupItemProps) => {
+export const ChipGroupItem = ({ value, ...props }: ChipGroupItemProps) => {
   const context = useChipGroupContext();
   const pressed = context.value.includes(value);
-  const isDisabled = context.disabled || disabled;
-
-  const roleProps =
-    context.type === 'single' ? { role: 'radio', 'aria-checked': pressed } : undefined;
+  const disabled = context.disabled || props.disabled;
 
   return (
     <Chip
       data-slot='chip-group-item'
-      disabled={isDisabled}
+      disabled={disabled}
       pressed={pressed}
       onPressedChange={(nextPressed) => context.onItemToggle(value, nextPressed)}
-      {...roleProps}
       {...props}
     />
   );

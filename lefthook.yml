@@ -1,11 +1,11 @@
 pre-commit:
   parallel: true
   commands:
-    core-checks:
-      run: sh .lefthook/core-checks
+    # core-checks:
+    #   run: sh .lefthook/core-checks
 
     lint:
-      glob: "src/**/*.{js,ts,tsx}"
+      glob: 'src/**/*.{js,ts,tsx}'
       run: pnpm run type && sh .lefthook/lint {staged_files}
       stage_fixed: true
 

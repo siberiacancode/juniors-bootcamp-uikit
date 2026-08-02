@@ -21,7 +21,7 @@ export type TypographyVariant =
   | 'title-lg'
   | 'title-md';
 
-type TypographyProps<Tag extends TypographyTag> = ComponentProps<Tag> & {
+export type TypographyProps<Tag extends TypographyTag = 'div'> = ComponentProps<Tag> & {
   as?: Tag;
   asChild?: boolean;
   variant?: TypographyVariant;

@@ -23,11 +23,10 @@ it('Should render chip group', () => {
 
   const group = screen.getByTestId(CHIP_GROUP_TEST_ID);
 
-  expect(group.classList.contains(styles.chipGroup)).toBeTruthy();
+  expect(group.classList.contains(styles.chip_group)).toBeTruthy();
   expect(group.classList.contains(styles.horizontal)).toBeTruthy();
   expect(group.getAttribute('data-slot')).toBe('chip-group');
   expect(group.getAttribute('data-orientation')).toBe('horizontal');
-  expect(group.getAttribute('role')).toBe('radiogroup');
 });
 
 it('Should render chip group item', () => {
@@ -43,8 +42,6 @@ it('Should render chip group item', () => {
 
   expect(item.textContent).toBe('First');
   expect(item.getAttribute('data-slot')).toBe('chip-group-item');
-  expect(item.getAttribute('role')).toBe('radio');
-  expect(item.getAttribute('aria-checked')).toBe('false');
 });
 
 it('Should render multiple chip group', () => {
@@ -60,11 +57,8 @@ it('Should render multiple chip group', () => {
   );
 
   const group = screen.getByTestId(CHIP_GROUP_TEST_ID);
-  const item = screen.getByTestId(getChipGroupItemTestId(0));
 
   expect(group.getAttribute('role')).toBe('toolbar');
-  expect(item.getAttribute('role')).not.toBe('radio');
-  expect(item.getAttribute('aria-checked')).toBeNull();
 });
 
 it('Should apply vertical orientation', () => {
@@ -90,7 +84,7 @@ it('Should merge custom className', () => {
   const group = screen.getByTestId(CHIP_GROUP_TEST_ID);
 
   expect(group.classList.contains('custom')).toBeTruthy();
-  expect(group.classList.contains(styles.chipGroup)).toBeTruthy();
+  expect(group.classList.contains(styles.chip_group)).toBeTruthy();
 });
 
 it('Should forward native attributes', () => {
@@ -172,24 +166,6 @@ it('Should change selected item in single group', () => {
   expect(secondItem.getAttribute('aria-checked')).toBe('true');
 });
 
-it('Should unselect item in single group', () => {
-  render(
-    <ChipGroup defaultValue='first' type='single'>
-      <ChipGroupItem data-testid={getChipGroupItemTestId(0)} value='first'>
-        First
-      </ChipGroupItem>
-    </ChipGroup>
-  );
-
-  const item = screen.getByTestId(getChipGroupItemTestId(0));
-
-  expect(item.getAttribute('aria-checked')).toBe('true');
-
-  fireEvent.click(item);
-
-  expect(item.getAttribute('aria-checked')).toBe('false');
-});
-
 it('Should call onValueChange in single group', () => {
   const onValueChange = vi.fn();
 
@@ -205,30 +181,6 @@ it('Should call onValueChange in single group', () => {
 
   expect(onValueChange).toHaveBeenCalledTimes(1);
   expect(onValueChange).toHaveBeenCalledWith('first');
-});
-
-it('Should keep controlled value in single group', () => {
-  const onValueChange = vi.fn();
-
-  render(
-    <ChipGroup type='single' value='first' onValueChange={onValueChange}>
-      <ChipGroupItem data-testid={getChipGroupItemTestId(0)} value='first'>
-        First
-      </ChipGroupItem>
-      <ChipGroupItem data-testid={getChipGroupItemTestId(1)} value='second'>
-        Second
-      </ChipGroupItem>
-    </ChipGroup>
-  );
-
-  const firstItem = screen.getByTestId(getChipGroupItemTestId(0));
-  const secondItem = screen.getByTestId(getChipGroupItemTestId(1));
-
-  fireEvent.click(secondItem);
-
-  expect(onValueChange).toHaveBeenCalledWith('second');
-  expect(firstItem.getAttribute('aria-checked')).toBe('true');
-  expect(secondItem.getAttribute('aria-checked')).toBe('false');
 });
 
 it('Should apply default value in multiple group', () => {

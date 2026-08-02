@@ -1,31 +1,32 @@
-import type { ComponentProps } from "react";
-import { Slot } from "radix-ui";
-import { cn } from "@siberiacancode/reactuse";
+import type { ComponentProps } from 'react';
 
-import styles from "./button.module.css";
+import { cn } from '@siberiacancode/reactuse';
+import { Slot } from 'radix-ui';
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
-export type ButtonSize = "sm" | "md" | "lg";
+import styles from './button.module.css';
 
-interface ButtonProps extends ComponentProps<"button"> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+export type ButtonVariant = 'ghost' | 'outline' | 'primary' | 'secondary';
+export type ButtonSize = 'lg' | 'md' | 'sm';
+
+export interface ButtonProps extends ComponentProps<'button'> {
   asChild?: boolean;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
 }
 
 export const Button = ({
   className,
-  variant = "primary",
-  size = "md",
+  variant = 'primary',
+  size = 'md',
   asChild = false,
   ...props
 }: ButtonProps) => {
-  const Comp = asChild ? Slot.Root : "button";
+  const Comp = asChild ? Slot.Root : 'button';
   return (
     <Comp
       className={cn(styles.button, styles[variant], styles[size], className)}
       data-size={size}
-      data-slot="button"
+      data-slot='button'
       data-variant={variant}
       {...props}
     />

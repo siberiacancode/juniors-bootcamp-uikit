@@ -1,4 +1,4 @@
-.iconButton {
+.icon_button {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
@@ -14,16 +14,16 @@
   cursor: pointer;
 }
 
-.iconButton:focus-visible {
+.icon_button:focus-visible {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
 }
 
-.iconButton:disabled {
+.icon_button:disabled {
   pointer-events: none;
 }
 
-.iconButton :global(svg) {
+.icon_button :global(svg) {
   pointer-events: none;
   flex-shrink: 0;
   width: 20px;

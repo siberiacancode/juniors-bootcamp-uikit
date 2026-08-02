@@ -22,13 +22,13 @@ it('Should render empty', () => {
 
   const title = screen.getByTestId(TITLE_TEST_ID);
   expect(title.textContent).toBe('Title');
-  expect(title.classList.contains(styles.emptyTitle)).toBeTruthy();
+  expect(title.classList.contains(styles.empty_title)).toBeTruthy();
   expect(title.getAttribute('data-slot')).toBe('empty-title');
 
   const description = screen.getByTestId(DESCRIPTION_TEST_ID);
   expect(description.textContent).toBe('Description text');
   expect(description.tagName).toBe('P');
-  expect(description.classList.contains(styles.emptyDescription)).toBeTruthy();
+  expect(description.classList.contains(styles.empty_description)).toBeTruthy();
   expect(description.getAttribute('data-slot')).toBe('empty-description');
 });
 

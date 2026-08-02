@@ -1,0 +1,151 @@
+.overview {
+  min-height: 100vh;
+  padding: 40px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1120px;
+  margin: 0 auto 32px;
+}
+
+.kicker {
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(216px, auto);
+  gap: 16px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.tile,
+.tile_wide,
+.tile_tall {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--ring);
+  border-radius: 8px;
+  background: var(--color-neutral-50);
+}
+
+.tile {
+  grid-column: span 2;
+}
+
+.tile_wide {
+  grid-column: span 4;
+}
+
+.tile_tall {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+.tile_header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tile_header > * {
+  min-width: 0;
+}
+
+.muted,
+.text {
+  color: var(--muted-foreground);
+}
+
+.actions,
+.icon_actions,
+.payment_cards,
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment_cards {
+  gap: 20px;
+}
+
+.type_stack {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.giant_button_slot {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.empty_preview {
+  min-height: 148px;
+  border: 1px dashed var(--ring);
+  border-radius: 8px;
+}
+
+.empty_icon {
+  width: 32px;
+  height: 32px;
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 900px) {
+  .overview {
+    padding: 24px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tile,
+  .tile_wide,
+  .tile_tall {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .overview {
+    padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tile,
+  .tile_wide,
+  .tile_tall {
+    grid-column: span 1;
+  }
+
+  .tile_header {
+    flex-direction: column;
+  }
+}

@@ -1,2 +1,6 @@
 allowBuilds:
   esbuild: true
+  lefthook: true
+publicHoistPattern:
+  - eslint
+  - prettier

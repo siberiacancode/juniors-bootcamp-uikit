@@ -21,7 +21,7 @@ it('Should render icon button', () => {
   );
   const iconButton = screen.getByTestId(ICON_BUTTON_TEST_ID);
   expect(iconButton.contains(screen.getByTestId('icon'))).toBeTruthy();
-  expect(iconButton.classList.contains(styles.iconButton)).toBeTruthy();
+  expect(iconButton.classList.contains(styles.icon_button)).toBeTruthy();
   expect(iconButton.classList.contains(styles.primary)).toBeTruthy();
   expect(iconButton.classList.contains(styles.md)).toBeTruthy();
   expect(iconButton.classList.contains(styles.rounded)).toBeTruthy();
@@ -84,7 +84,7 @@ it('Should forward native attributes', () => {
   expect(iconButton.getAttribute('type')).toBe('submit');
   expect(iconButton.getAttribute('aria-label')).toBe('submit-button');
   expect(iconButton.classList.contains('custom')).toBeTruthy();
-  expect(iconButton.classList.contains(styles.iconButton)).toBeTruthy();
+  expect(iconButton.classList.contains(styles.icon_button)).toBeTruthy();
 });
 
 it('Should expose accessible name via aria-label', () => {
