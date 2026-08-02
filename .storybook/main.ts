@@ -9,9 +9,8 @@ export default defineMain({
     defaultName: 'juniorsbootcamp uikit',
     docsMode: true
   },
-  viteFinal: async (config) => {
-    return mergeConfig(config, {
+  viteFinal: async (config) =>
+    mergeConfig(config, {
       base: '/ui-kit/'
-    });
-  }
+    })
 });
