@@ -1,15 +1,2 @@
-pre-commit:
-  parallel: true
-  commands:
-    # core-checks:
-    #   run: sh .lefthook/core-checks
-
-    lint:
-      glob: 'src/**/*.{js,ts,tsx}'
-      run: pnpm run type && sh .lefthook/lint {staged_files}
-      stage_fixed: true
-
-commit-msg:
-  commands:
-    branch-prefix:
-      run: sh .lefthook/commit-msg {1}
+extends:
+  - ./node_modules/@siberiacancode/lefthook/dist/lefthook.yml
