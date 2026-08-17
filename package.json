@@ -27,6 +27,16 @@
         "default": "./dist/cjs/index.cjs"
       }
     },
+    "./theme": {
+      "import": {
+        "types": "./dist/types/theme/index.d.ts",
+        "default": "./dist/esm/theme/index.mjs"
+      },
+      "require": {
+        "types": "./dist/types/theme/index.d.ts",
+        "default": "./dist/cjs/theme/index.cjs"
+      }
+    },
     "./styles/*": "./dist/styles/*"
   },
   "main": "dist/cjs/index.cjs",
@@ -37,7 +47,7 @@
   ],
   "scripts": {
     "prepublishOnly": "pnpm unit-test run && pnpm build",
-    "build": "shx rm -rf dist && vite build",
+    "build": "vite build",
     "build:js": "tsc --project tsconfig.build.json && pnpm prettier --write src/bundle",
     "lint": "eslint . --fix",
     "lint-inspector": "npx @eslint/config-inspector@latest",

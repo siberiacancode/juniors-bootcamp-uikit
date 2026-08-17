@@ -1,0 +1,17 @@
+.theme_switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--ring);
+  border-radius: 9999px;
+  background: var(--background);
+}
+
+.theme_switcher_button {
+  color: var(--foreground);
+}
+
+.theme_switcher_button.active {
+  color: var(--primary-foreground);
+}

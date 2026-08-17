@@ -195,3 +195,44 @@
   --ring-error: var(--color-red-300);
   --input: var(--color-neutral-600);
 }
+
+:root.dark,
+:root[data-theme='dark'] {
+  --background: var(--color-neutral-900);
+  --foreground: var(--color-neutral-50);
+  --surface: var(--color-neutral-800);
+  --surface-foreground: var(--color-neutral-200);
+
+  --primary: var(--color-neutral-100);
+  --primary-hover: var(--color-neutral-200);
+  --primary-foreground: var(--color-neutral-900);
+
+  --secondary: var(--color-neutral-800);
+  --secondary-hover: var(--color-neutral-700);
+  --secondary-foreground: var(--color-neutral-200);
+
+  --outline: var(--color-neutral-800);
+  --ghost-hover: var(--color-neutral-800);
+  --ghost-foreground: var(--color-neutral-50);
+  --muted: var(--color-neutral-800);
+  --muted-foreground: var(--color-neutral-300);
+
+  --accent-primary: var(--color-yellow-400);
+  --accent-primary-hover: var(--color-yellow-500);
+  --accent-secondary: var(--color-violet-400);
+  --accent-secondary-active: var(--color-violet-500);
+  --accent-tertiary: var(--color-orange-500);
+  --accent-quaternary: var(--color-pink-500);
+  --accent-foreground: var(--color-neutral-900);
+
+  --destructive-foreground: var(--color-red-400);
+  --destructive-background: var(--color-red-900);
+  --destructive-border: var(--color-red-400);
+
+  --border-hard: var(--color-neutral-300);
+  --border-soft: var(--color-neutral-500);
+
+  --ring: var(--color-neutral-400);
+  --ring-error: var(--color-red-700);
+  --input: var(--color-neutral-500);
+}

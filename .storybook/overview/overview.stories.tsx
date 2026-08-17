@@ -1,4 +1,15 @@
-import { ArrowRightIcon, BellIcon, CreditCardIcon, SearchIcon, SparklesIcon } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  BellIcon,
+  CreditCardIcon,
+  MonitorIcon,
+  MoonStarIcon,
+  SearchIcon,
+  SparklesIcon,
+  SunIcon
+} from 'lucide-react';
+
+import type { Theme } from '../../src/theme';
 
 import {
   Breadcrumb,
@@ -8,29 +19,61 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '../../src/components/breadcrumb/breadcrumb';
-import { Button } from '../../src/components/button/button';
-import { ChipGroup, ChipGroupItem } from '../../src/components/chip-group/chip-group';
-import { Chip } from '../../src/components/chip/chip';
-import { Empty, EmptyDescription, EmptyTitle } from '../../src/components/empty/empty';
-import { GiantButton } from '../../src/components/giant-button/giant-button';
-import { IconButton } from '../../src/components/icon-button/icon-button';
-import { NewPaymentCard } from '../../src/components/new-payment-card/new-payment-card';
-import { SavedPaymentCard } from '../../src/components/saved-payment-card/saved-payment-card';
-import { Typography } from '../../src/components/typography/typography';
+} from '../../src/components/atoms/breadcrumb/breadcrumb';
+import { Button } from '../../src/components/atoms/button/button';
+import { ChipGroup, ChipGroupItem } from '../../src/components/atoms/chip-group/chip-group';
+import { Chip } from '../../src/components/atoms/chip/chip';
+import { Empty, EmptyDescription, EmptyTitle } from '../../src/components/atoms/empty/empty';
+import { IconButton } from '../../src/components/atoms/icon-button/icon-button';
+import { NewPaymentCard } from '../../src/components/atoms/new-payment-card/new-payment-card';
+import { SavedPaymentCard } from '../../src/components/atoms/saved-payment-card/saved-payment-card';
+import { Typography } from '../../src/components/atoms/typography/typography';
+import { GiantButton } from '../../src/components/molecules/giant-button/giant-button';
+import {
+  ThemeSwitcher,
+  ThemeSwitcherItem
+} from '../../src/components/molecules/theme-switcher/theme-switcher';
+import { ThemeProvider, useTheme } from '../../src/theme';
 import preview from '../preview';
 
 import styles from './overview.module.css';
 
+const OverviewThemeSwitcher = () => {
+  const { value, set } = useTheme();
+
+  return (
+    <ThemeSwitcher
+      aria-label='Theme'
+      value={value}
+      onValueChange={(nextValue) => set(nextValue as Theme)}
+    >
+      <ThemeSwitcherItem aria-label='Light theme' value='light'>
+        <SunIcon />
+      </ThemeSwitcherItem>
+      <ThemeSwitcherItem aria-label='System theme' value='system'>
+        <MonitorIcon />
+      </ThemeSwitcherItem>
+      <ThemeSwitcherItem aria-label='Dark theme' value='dark'>
+        <MoonStarIcon />
+      </ThemeSwitcherItem>
+    </ThemeSwitcher>
+  );
+};
+
 const OverviewShowcase = () => (
   <main className={styles.overview}>
     <header className={styles.header}>
-      <Typography className={styles.kicker} variant='caption'>
-        Juniors Bootcamp UI Kit
-      </Typography>
-      <Typography as='h1' className={styles.title} variant='heading-xl'>
-        Components
-      </Typography>
+      <div className={styles.header_content}>
+        <div className={styles.header_text}>
+          <img alt='Juniors Bootcamp' className={styles.logo} src='brand/dark-logo-full.png' />
+          <img
+            alt='Juniors Bootcamp'
+            className={styles.logo_dark}
+            src='brand/light-logo-full.png'
+          />
+        </div>
+        <OverviewThemeSwitcher />
+      </div>
     </header>
 
     <div className={styles.grid}>
@@ -144,7 +187,7 @@ const OverviewShowcase = () => (
             Frontend
           </Chip>
           <Chip variant='primary'>React</Chip>
-          <Chip size='sm'>CSS</Chip>
+          <Chip>CSS</Chip>
         </div>
         <ChipGroup defaultValue='junior' type='single'>
           <ChipGroupItem value='junior'>Junior</ChipGroupItem>
@@ -188,12 +231,24 @@ const OverviewShowcase = () => (
   </main>
 );
 
+const OverviewDocsPage = () => (
+  <ThemeProvider>
+    <OverviewShowcase />
+  </ThemeProvider>
+);
+
 const meta = preview.meta({
   component: OverviewShowcase,
   title: 'Overview',
   parameters: {
-    layout: 'fullscreen'
+    docs: {
+      page: OverviewDocsPage
+    },
+    layout: 'fullscreen',
+    options: {
+      showToolbar: false
+    }
   }
 });
 
-export const AllComponents = meta.story({});
+export const Overview = meta.story({});
