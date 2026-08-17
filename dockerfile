@@ -6,7 +6,7 @@ WORKDIR /app
 RUN corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN CI=true pnpm install --frozen-lockfile
+RUN CI=true pnpm install --frozen-lockfile --ignore-scripts
 
 COPY . .
 RUN pnpm build-storybook
