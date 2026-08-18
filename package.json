@@ -1,6 +1,6 @@
 {
   "name": "@siberiacancode/uikit",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "UI-kit for juniorsbootcamp",
   "author": {
@@ -46,9 +46,7 @@
     "dist"
   ],
   "scripts": {
-    "prepublishOnly": "pnpm unit-test run && pnpm build",
     "build": "vite build",
-    "build:js": "tsc --project tsconfig.build.json && pnpm prettier --write src/bundle",
     "lint": "eslint . --fix",
     "lint-inspector": "npx @eslint/config-inspector@latest",
     "format": "prettier --write .",

@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# 🧊 Juniors Bootcamp UIKit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React UI-kit for Juniors Bootcamp projects.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname
-      }
-      // other options...
-    }
-  }
-]);
+```bash
+npm install @siberiacancode/uikit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+Import components from the package entrypoint:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname
-      }
-      // other options...
-    }
-  }
-]);
+```tsx
+import { Button, Typography } from '@siberiacancode/uikit';
+
+export const App = () => (
+  <main>
+    <Typography as='h1' variant='display'>
+      Juniors Bootcamp
+    </Typography>
+
+    <Button size='md' variant='primary'>
+      Start learning
+    </Button>
+  </main>
+);
 ```
+
+Base styles are included when importing the main package. You can also import built styles directly:
+
+```tsx
+import '@siberiacancode/uikit/styles/base.css';
+```
+
+```tsx
+import { ThemeProvider, ThemeScript, useTheme } from '@siberiacancode/uikit/theme';
+
+export const Root = ({ children }: { children: React.ReactNode }) => (
+  <html lang='en'>
+    <head>
+      <ThemeScript />
+    </head>
+    <body>
+      <ThemeProvider>{children}</ThemeProvider>
+    </body>
+  </html>
+);
+
+export const ThemeButton = () => {
+  const theme = useTheme();
+
+  return <button onClick={() => theme.set('dark')}>Dark theme</button>;
+};
+```
+
+## Components
+
+- `Button`
+- `IconButton`
+- `Typography`
+- `Breadcrumb`
+- `Chip`
+- `ChipGroup`
+- `Empty`
+- `NewPaymentCard`
+- `SavedPaymentCard`
+- `GiantButton`
+- `ThemeSwitcher`
+
+## License
+
+MIT

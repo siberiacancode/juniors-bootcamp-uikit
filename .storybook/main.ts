@@ -11,6 +11,7 @@ export default defineMain({
   },
   viteFinal: async (config) =>
     mergeConfig(config, {
+      publicDir: true,
       base: '/ui-kit/'
     })
 });

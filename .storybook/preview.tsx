@@ -6,7 +6,7 @@ import { addons } from 'storybook/preview-api';
 import { ThemeProvider, useTheme } from '../src/theme';
 import { getStorybookTheme, STORYBOOK_THEME_CHANGE_EVENT } from './theme';
 
-import '../src/assets/global.css';
+import '../src/assets/base.css';
 
 const StorybookTheme = () => {
   const { value } = useTheme();
