@@ -1,7 +1,6 @@
 import dts from 'unplugin-dts/vite';
 import { defineConfig } from 'vite';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
-import removeAttributes from 'vite-plugin-react-remove-attributes';
 
 const assetFileNames = (assetInfo: { names: string[] }) => {
   // ✅ important:
@@ -17,11 +16,12 @@ export default defineConfig({
   base: './',
   publicDir: false,
   plugins: [
-    removeAttributes.default({ attributes: ['data-testid'] }),
     externalizeDeps(),
     dts({
+      tsconfigPath: './tsconfig.json',
+      entryRoot: 'src',
       include: ['src'],
-      outDirs: [{ dir: 'dist/types' }],
+      outDirs: 'dist/types',
       exclude: ['src/**/*.test.*', 'src/**/*.stories.*']
     })
   ],
@@ -32,7 +32,8 @@ export default defineConfig({
     cssCodeSplit: true,
     lib: {
       entry: {
-        index: 'src/index.ts'
+        index: 'src/index.ts',
+        'theme/index': 'src/theme/index.ts'
       }
     },
     rollupOptions: {

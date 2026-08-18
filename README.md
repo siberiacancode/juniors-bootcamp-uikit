@@ -34,10 +34,16 @@ Base styles are included when importing the main package. You can also import bu
 import '@siberiacancode/uikit/styles/base.css';
 ```
 
+## Theme
+
+Use the theme entrypoint for theme state, SSR-safe initialization and switching:
+
 ```tsx
+import type { ReactNode } from 'react';
+
 import { ThemeProvider, ThemeScript, useTheme } from '@siberiacancode/uikit/theme';
 
-export const Root = ({ children }: { children: React.ReactNode }) => (
+export const Root = ({ children }: { children: ReactNode }) => (
   <html lang='en'>
     <head>
       <ThemeScript />

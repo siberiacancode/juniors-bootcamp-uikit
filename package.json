@@ -1,6 +1,6 @@
 {
   "name": "@siberiacancode/uikit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "UI-kit for juniorsbootcamp",
   "author": {
@@ -69,6 +69,7 @@
     "@siberiacancode/eslint": "^2.18.0",
     "@siberiacancode/lefthook": "1.0.2",
     "@siberiacancode/prettier": "^1.8.0",
+    "@siberiacancode/tsconfig": "^1.2.0",
     "@siberiacancode/vitest": "^2.4.1",
     "@storybook/addon-a11y": "^10.5.0",
     "@storybook/addon-docs": "^10.5.0",
@@ -88,7 +89,6 @@
     "unplugin-dts": "^1.0.3",
     "vite": "^8.1.1",
     "vite-plugin-externalize-deps": "^0.10.0",
-    "vite-plugin-react-remove-attributes": "^1.0.3",
     "vitest": "^4.1.10"
   }
 }

@@ -1,4 +1,13 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "extends": "@siberiacancode/tsconfig/tsconfig.react.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowArbitraryExtensions": true,
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom", "node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", ".storybook", "tests", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
