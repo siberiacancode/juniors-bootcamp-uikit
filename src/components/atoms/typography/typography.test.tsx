@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { expect, it } from 'vitest';
 
 import type { TypographyVariant } from './typography';
 
+import { testConformance } from '../../../../tests/describe-conformance';
 import { Typography } from './typography';
 
 import styles from './typography.module.css';
@@ -17,21 +19,28 @@ const VARIANTS: TypographyVariant[] = [
   'body-lg',
   'body-md',
   'body-sm',
-  'link',
-  'caption'
+  'caption',
+  'link'
 ];
 
 const TYPOGRAPHY_TEST_ID = 'typography';
 
-it('Should render typography', () => {
+testConformance(<Typography>Text</Typography>, {
+  tag: 'DIV',
+  slot: 'typography',
+  rootClass: styles.typography,
+  asChild: true,
+  asChildTag: 'span'
+});
+
+it('Should render as default', () => {
   render(<Typography data-testid={TYPOGRAPHY_TEST_ID}>Text</Typography>);
   const typography = screen.getByTestId(TYPOGRAPHY_TEST_ID);
-  expect(typography.textContent).toBe('Text');
+
   expect(typography.tagName).toBe('DIV');
-  expect(typography.classList.contains(styles.typography)).toBeTruthy();
-  expect(typography.classList.contains(styles['body-md'])).toBeTruthy();
+  expect(typography.textContent).toBe('Text');
   expect(typography.getAttribute('data-variant')).toBe('body-md');
-  expect(typography.getAttribute('data-slot')).toBe('typography');
+  expect(typography.classList.contains(styles['body-md'])).toBeTruthy();
 });
 
 VARIANTS.forEach((variant) => {
@@ -47,45 +56,20 @@ VARIANTS.forEach((variant) => {
   });
 });
 
-it('Should render as custom tag', () => {
+it('Should render as the tag from the "as" prop', () => {
   render(
-    <Typography as='h1' data-testid={TYPOGRAPHY_TEST_ID} variant='display'>
+    <Typography as='h1' data-testid={TYPOGRAPHY_TEST_ID}>
       Heading
     </Typography>
   );
-  const typography = screen.getByTestId(TYPOGRAPHY_TEST_ID);
-  expect(typography.tagName).toBe('H1');
-  expect(typography.classList.contains(styles.display)).toBeTruthy();
+  expect(screen.getByTestId(TYPOGRAPHY_TEST_ID).tagName).toBe('H1');
 });
 
-it('Should forward native attributes', () => {
+it('Should forward tag-specific attributes', () => {
   render(
-    <Typography
-      as='a'
-      className='custom'
-      data-testid={TYPOGRAPHY_TEST_ID}
-      href='/home'
-      variant='link'
-    >
+    <Typography as='a' data-testid={TYPOGRAPHY_TEST_ID} href='/home'>
       Link
     </Typography>
   );
-  const typography = screen.getByTestId(TYPOGRAPHY_TEST_ID);
-  expect(typography.tagName).toBe('A');
-  expect(typography.getAttribute('href')).toBe('/home');
-  expect(typography.classList.contains('custom')).toBeTruthy();
-  expect(typography.classList.contains(styles.typography)).toBeTruthy();
-});
-
-it('Should render as child when asChild', () => {
-  render(
-    <Typography asChild data-testid={TYPOGRAPHY_TEST_ID} variant='title-lg'>
-      <span>Slotted</span>
-    </Typography>
-  );
-  const typography = screen.getByTestId(TYPOGRAPHY_TEST_ID);
-  expect(typography.tagName).toBe('SPAN');
-  expect(typography.textContent).toBe('Slotted');
-  expect(typography.classList.contains(styles['title-lg'])).toBeTruthy();
-  expect(typography.getAttribute('data-slot')).toBe('typography');
+  expect(screen.getByTestId(TYPOGRAPHY_TEST_ID).getAttribute('href')).toBe('/home');
 });

@@ -1,44 +1,54 @@
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
+import { testConformance } from '../../../../tests/describe-conformance';
 import { Empty, EmptyDescription, EmptyTitle } from './empty';
 
 import styles from './empty.module.css';
 
-const EMPTY_TEST_ID = 'empty';
-const TITLE_TEST_ID = 'empty-title';
-const DESCRIPTION_TEST_ID = 'empty-description';
+describe('Empty', () => {
+  testConformance(<Empty>Content</Empty>, {
+    tag: 'DIV',
+    slot: 'empty',
+    rootClass: styles.empty
+  });
 
-it('Should render empty', () => {
-  render(
-    <Empty data-testid={EMPTY_TEST_ID}>
-      <EmptyTitle data-testid={TITLE_TEST_ID}>Title</EmptyTitle>
-      <EmptyDescription data-testid={DESCRIPTION_TEST_ID}>Description text</EmptyDescription>
-    </Empty>
-  );
-
-  const empty = screen.getByTestId(EMPTY_TEST_ID);
-  expect(empty.classList.contains(styles.empty)).toBeTruthy();
-  expect(empty.getAttribute('data-slot')).toBe('empty');
-
-  const title = screen.getByTestId(TITLE_TEST_ID);
-  expect(title.textContent).toBe('Title');
-  expect(title.classList.contains(styles.empty_title)).toBeTruthy();
-  expect(title.getAttribute('data-slot')).toBe('empty-title');
-
-  const description = screen.getByTestId(DESCRIPTION_TEST_ID);
-  expect(description.textContent).toBe('Description text');
-  expect(description.tagName).toBe('P');
-  expect(description.classList.contains(styles.empty_description)).toBeTruthy();
-  expect(description.getAttribute('data-slot')).toBe('empty-description');
+  it('Should render as default', () => {
+    render(
+      <Empty data-testid='empty'>
+        <span>content</span>
+      </Empty>
+    );
+    expect(screen.getByTestId('empty').textContent).toBe('content');
+  });
 });
 
-it('Should merge custom className', () => {
-  render(
-    <Empty className='custom' data-testid={EMPTY_TEST_ID}>
-      <EmptyTitle>Title</EmptyTitle>
-    </Empty>
-  );
-  const empty = screen.getByTestId(EMPTY_TEST_ID);
-  expect(empty.classList.contains('custom')).toBeTruthy();
-  expect(empty.classList.contains(styles.empty)).toBeTruthy();
+describe('EmptyTitle', () => {
+  testConformance(<EmptyTitle>No results</EmptyTitle>, {
+    tag: 'DIV',
+    slot: 'empty-title',
+    rootClass: styles.empty_title
+  });
+
+  it('Should render as default', () => {
+    render(<EmptyTitle data-testid='empty-title'>No results</EmptyTitle>);
+    const title = screen.getByTestId('empty-title');
+    expect(title.tagName).toBe('DIV');
+    expect(title.textContent).toBe('No results');
+  });
+});
+
+describe('EmptyDescription', () => {
+  testConformance(<EmptyDescription>Try again</EmptyDescription>, {
+    tag: 'P',
+    slot: 'empty-description',
+    rootClass: styles.empty_description
+  });
+
+  it('Should render as default', () => {
+    render(<EmptyDescription data-testid='empty-description'>Try again</EmptyDescription>);
+    const description = screen.getByTestId('empty-description');
+    expect(description.tagName).toBe('P');
+    expect(description.textContent).toBe('Try again');
+  });
 });

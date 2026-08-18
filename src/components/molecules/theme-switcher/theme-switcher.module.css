@@ -5,7 +5,7 @@
   padding: 4px;
   border: 1px solid var(--ring);
   border-radius: 9999px;
-  background: var(--background);
+  background: inherit;
 }
 
 .theme_switcher_button {

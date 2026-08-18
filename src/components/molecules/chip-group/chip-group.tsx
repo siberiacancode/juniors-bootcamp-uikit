@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { cn, useControllableState } from '@siberiacancode/reactuse';
 import { createContext, use } from 'react';
 
-import { Chip } from '../chip/chip';
+import { Chip } from '../../atoms/chip/chip';
 
 import styles from './chip-group.module.css';
 
@@ -96,9 +96,18 @@ export const ChipGroupItem = ({ value, ...props }: ChipGroupItemProps) => {
   const context = useChipGroupContext();
   const pressed = context.value.includes(value);
   const disabled = context.disabled || props.disabled;
+  const singleProps =
+    context.type === 'single'
+      ? {
+          'aria-checked': pressed,
+          'aria-pressed': undefined,
+          role: 'radio' as const
+        }
+      : {};
 
   return (
     <Chip
+      {...singleProps}
       data-slot='chip-group-item'
       disabled={disabled}
       pressed={pressed}

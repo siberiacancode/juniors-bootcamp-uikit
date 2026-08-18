@@ -1,15 +1,4 @@
-import {
-  ArrowRightIcon,
-  BellIcon,
-  CreditCardIcon,
-  MonitorIcon,
-  MoonStarIcon,
-  SearchIcon,
-  SparklesIcon,
-  SunIcon
-} from 'lucide-react';
-
-import type { Theme } from '../../src/theme';
+import { ArrowRightIcon, BellIcon, CreditCardIcon, SearchIcon, SparklesIcon } from 'lucide-react';
 
 import {
   Breadcrumb,
@@ -21,13 +10,13 @@ import {
   BreadcrumbSeparator
 } from '../../src/components/atoms/breadcrumb/breadcrumb';
 import { Button } from '../../src/components/atoms/button/button';
-import { ChipGroup, ChipGroupItem } from '../../src/components/atoms/chip-group/chip-group';
 import { Chip } from '../../src/components/atoms/chip/chip';
 import { Empty, EmptyDescription, EmptyTitle } from '../../src/components/atoms/empty/empty';
 import { IconButton } from '../../src/components/atoms/icon-button/icon-button';
 import { NewPaymentCard } from '../../src/components/atoms/new-payment-card/new-payment-card';
 import { SavedPaymentCard } from '../../src/components/atoms/saved-payment-card/saved-payment-card';
 import { Typography } from '../../src/components/atoms/typography/typography';
+import { ChipGroup, ChipGroupItem } from '../../src/components/molecules/chip-group/chip-group';
 import { GiantButton } from '../../src/components/molecules/giant-button/giant-button';
 import {
   ThemeSwitcher,
@@ -42,20 +31,10 @@ const OverviewThemeSwitcher = () => {
   const { value, set } = useTheme();
 
   return (
-    <ThemeSwitcher
-      aria-label='Theme'
-      value={value}
-      onValueChange={(nextValue) => set(nextValue as Theme)}
-    >
-      <ThemeSwitcherItem aria-label='Light theme' value='light'>
-        <SunIcon />
-      </ThemeSwitcherItem>
-      <ThemeSwitcherItem aria-label='System theme' value='system'>
-        <MonitorIcon />
-      </ThemeSwitcherItem>
-      <ThemeSwitcherItem aria-label='Dark theme' value='dark'>
-        <MoonStarIcon />
-      </ThemeSwitcherItem>
+    <ThemeSwitcher aria-label='Theme' value={value} onValueChange={set}>
+      <ThemeSwitcherItem aria-label='Light theme' value='light' />
+      <ThemeSwitcherItem aria-label='System theme' value='system' />
+      <ThemeSwitcherItem aria-label='Dark theme' value='dark' />
     </ThemeSwitcher>
   );
 };

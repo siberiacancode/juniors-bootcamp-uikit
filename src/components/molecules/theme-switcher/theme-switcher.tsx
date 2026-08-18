@@ -1,15 +1,24 @@
-import type { ComponentProps, ReactNode } from 'react';
+import type { ComponentProps } from 'react';
 
 import { cn } from '@siberiacancode/reactuse';
+import { MonitorIcon, MoonStarIcon, SunIcon } from 'lucide-react';
 import { createContext, use } from 'react';
+
+import type { Theme } from '../../../theme';
 
 import { IconButton } from '../../atoms/icon-button/icon-button';
 
 import styles from './theme-switcher.module.css';
 
+const THEME_ICONS = {
+  light: SunIcon,
+  system: MonitorIcon,
+  dark: MoonStarIcon
+} satisfies Record<Theme, typeof SunIcon>;
+
 interface ThemeSwitcherContextValue {
-  value?: string;
-  onValueChange?: (value: string) => void;
+  value?: Theme;
+  onValueChange?: (value: Theme) => void;
 }
 
 const ThemeSwitcherContext = createContext<ThemeSwitcherContextValue | null>(null);
@@ -21,8 +30,8 @@ const useThemeSwitcherContext = () => {
 };
 
 export interface ThemeSwitcherProps extends Omit<ComponentProps<'div'>, 'onChange'> {
-  value?: string;
-  onValueChange?: (value: string) => void;
+  value?: Theme;
+  onValueChange?: (value: Theme) => void;
 }
 
 export const ThemeSwitcher = ({
@@ -41,23 +50,26 @@ export const ThemeSwitcher = ({
   </ThemeSwitcherContext>
 );
 
-export interface ThemeSwitcherItemProps extends ComponentProps<typeof IconButton> {
-  children?: ReactNode;
-  value: string;
+export interface ThemeSwitcherItemProps extends Omit<
+  ComponentProps<typeof IconButton>,
+  'children' | 'value'
+> {
+  value: Theme;
 }
 
 export const ThemeSwitcherItem = ({
   className,
-  children,
   value,
   onClick,
   ...props
 }: ThemeSwitcherItemProps) => {
   const context = useThemeSwitcherContext();
   const isActive = context.value === value;
+  const Icon = THEME_ICONS[value];
 
   return (
     <IconButton
+      aria-label={`${value} theme`}
       aria-pressed={isActive}
       className={cn(styles.theme_switcher_button, isActive && styles.active, className)}
       data-slot='theme-switcher-item'
@@ -71,7 +83,7 @@ export const ThemeSwitcherItem = ({
       }}
       {...props}
     >
-      {children}
+      <Icon />
     </IconButton>
   );
 };

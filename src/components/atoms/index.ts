@@ -1,6 +1,6 @@
+export * from '../molecules/chip-group/chip-group';
 export * from './breadcrumb/breadcrumb';
 export * from './button/button';
-export * from './chip-group/chip-group';
 export * from './chip/chip';
 export * from './empty/empty';
 export * from './icon-button/icon-button';

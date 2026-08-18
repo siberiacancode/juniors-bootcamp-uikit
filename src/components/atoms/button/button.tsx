@@ -17,7 +17,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
 export const Button = ({
   className,
   variant = 'primary',
-  size = 'md',
+  size = 'lg',
   asChild = false,
   ...props
 }: ButtonProps) => {

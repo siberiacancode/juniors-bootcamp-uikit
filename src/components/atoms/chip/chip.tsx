@@ -41,11 +41,6 @@ export const Chip = ({
 
   const Comp = asChild ? Slot.Root : 'button';
 
-  const handleClick: ComponentProps<'button'>['onClick'] = (event) => {
-    onClick?.(event);
-    if (!disabled) setPressed(!pressed);
-  };
-
   return (
     <Comp
       aria-pressed={pressed}
@@ -57,7 +52,10 @@ export const Chip = ({
       data-variant={variant}
       disabled={disabled}
       type='button'
-      onClick={handleClick}
+      onClick={(event) => {
+        onClick?.(event);
+        setPressed(!pressed);
+      }}
       {...props}
     >
       <Slot.Slottable>{children}</Slot.Slottable>

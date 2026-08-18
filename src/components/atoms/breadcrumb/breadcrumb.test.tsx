@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
+import { testConformance } from '../../../../tests/describe-conformance';
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -12,94 +14,136 @@ import {
 
 import styles from './breadcrumb.module.css';
 
-const BREADCRUMB_TEST_ID = 'breadcrumb';
-
-it('Should render breadcrumb', () => {
-  render(
-    <Breadcrumb data-testid={BREADCRUMB_TEST_ID}>
-      <BreadcrumbList data-testid='breadcrumb-list'>
-        <BreadcrumbItem data-testid='breadcrumb-item'>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator data-testid='breadcrumb-separator' />
+describe('Breadcrumb', () => {
+  testConformance(
+    <Breadcrumb>
+      <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbPage data-testid='breadcrumb-page'>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>Current</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
-    </Breadcrumb>
+    </Breadcrumb>,
+    {
+      tag: 'NAV',
+      slot: 'breadcrumb',
+      rootClass: styles.breadcrumb
+    }
   );
 
-  const breadcrumb = screen.getByTestId(BREADCRUMB_TEST_ID);
-  const list = screen.getByTestId('breadcrumb-list');
-  const item = screen.getByTestId('breadcrumb-item');
-  const separator = screen.getByTestId('breadcrumb-separator');
-  const page = screen.getByTestId('breadcrumb-page');
-
-  expect(breadcrumb.classList.contains(styles.breadcrumb)).toBeTruthy();
-  expect(breadcrumb.getAttribute('aria-label')).toBe('breadcrumb');
-  expect(breadcrumb.getAttribute('data-slot')).toBe('breadcrumb');
-  expect(list.classList.contains(styles.breadcrumb_list)).toBeTruthy();
-  expect(item.classList.contains(styles.breadcrumb_item)).toBeTruthy();
-  expect(separator.classList.contains(styles.breadcrumb_separator)).toBeTruthy();
-  expect(page.classList.contains(styles.breadcrumb_page)).toBeTruthy();
-  expect(page.getAttribute('aria-current')).toBe('page');
+  it('Should render as default', () => {
+    render(<Breadcrumb data-testid='breadcrumb' />);
+    expect(screen.getByTestId('breadcrumb').getAttribute('aria-label')).toBe('breadcrumb');
+  });
 });
 
-it('Should render breadcrumb link', () => {
-  render(
-    <BreadcrumbLink data-testid='breadcrumb-link' href='/home'>
-      Home
-    </BreadcrumbLink>
+describe('BreadcrumbList', () => {
+  testConformance(
+    <BreadcrumbList>
+      <BreadcrumbItem>Home</BreadcrumbItem>
+    </BreadcrumbList>,
+    {
+      tag: 'OL',
+      slot: 'breadcrumb-list',
+      rootClass: styles.breadcrumb_list
+    }
   );
-
-  const link = screen.getByTestId('breadcrumb-link');
-
-  expect(link.tagName).toBe('A');
-  expect(link.getAttribute('href')).toBe('/home');
-  expect(link.classList.contains(styles.breadcrumb_link)).toBeTruthy();
-  expect(link.getAttribute('data-slot')).toBe('breadcrumb-link');
 });
 
-it('Should render breadcrumb link as child', () => {
-  render(
-    <BreadcrumbLink asChild data-testid='breadcrumb-link'>
-      <button type='button'>Home</button>
-    </BreadcrumbLink>
-  );
-
-  const link = screen.getByTestId('breadcrumb-link');
-
-  expect(link.tagName).toBe('BUTTON');
-  expect(link.textContent).toBe('Home');
-  expect(link.classList.contains(styles.breadcrumb_link)).toBeTruthy();
+describe('BreadcrumbItem', () => {
+  testConformance(<BreadcrumbItem>Home</BreadcrumbItem>, {
+    tag: 'LI',
+    slot: 'breadcrumb-item',
+    rootClass: styles.breadcrumb_item,
+    wrapper: (node) => <ol>{node}</ol>
+  });
 });
 
-it('Should render left separator', () => {
-  render(<BreadcrumbSeparator current data-testid='breadcrumb-separator' direction='left' />);
+describe('BreadcrumbLink', () => {
+  testConformance(<BreadcrumbLink href='/home'>Home</BreadcrumbLink>, {
+    tag: 'A',
+    slot: 'breadcrumb-link',
+    rootClass: styles.breadcrumb_link,
+    asChild: true,
+    asChildTag: 'button'
+  });
 
-  const separator = screen.getByTestId('breadcrumb-separator');
-
-  expect(separator.getAttribute('data-current')).toBe('true');
-  expect(separator.getAttribute('data-direction')).toBe('left');
-  expect(separator.getAttribute('role')).toBe('presentation');
-  expect(separator.getAttribute('aria-hidden')).toBe('true');
+  it('Should forward the href', () => {
+    render(
+      <BreadcrumbLink data-testid='breadcrumb-link' href='/home'>
+        Home
+      </BreadcrumbLink>
+    );
+    expect(screen.getByTestId('breadcrumb-link').getAttribute('href')).toBe('/home');
+  });
 });
 
-it('Should render breadcrumb ellipsis', () => {
-  render(<BreadcrumbEllipsis data-testid='breadcrumb-ellipsis' />);
+describe('BreadcrumbPage', () => {
+  testConformance(<BreadcrumbPage>Current</BreadcrumbPage>, {
+    tag: 'SPAN',
+    slot: 'breadcrumb-page',
+    rootClass: styles.breadcrumb_page
+  });
 
-  const ellipsis = screen.getByTestId('breadcrumb-ellipsis');
-
-  expect(ellipsis.classList.contains(styles.breadcrumb_ellipsis)).toBeTruthy();
-  expect(ellipsis.getAttribute('data-slot')).toBe('breadcrumb-ellipsis');
-  expect(ellipsis.getAttribute('role')).toBe('presentation');
+  it('Should mark the current page for assistive tech', () => {
+    render(<BreadcrumbPage data-testid='breadcrumb-page'>Current</BreadcrumbPage>);
+    const page = screen.getByTestId('breadcrumb-page');
+    expect(page.getAttribute('aria-current')).toBe('page');
+    expect(page.getAttribute('aria-disabled')).toBe('true');
+    expect(page.getAttribute('role')).toBe('link');
+  });
 });
 
-it('Should merge custom className', () => {
-  render(<Breadcrumb className='custom' data-testid={BREADCRUMB_TEST_ID} />);
+describe('BreadcrumbSeparator', () => {
+  testConformance(<BreadcrumbSeparator />, {
+    tag: 'LI',
+    slot: 'breadcrumb-separator',
+    rootClass: styles.breadcrumb_separator,
+    wrapper: (node) => <ol>{node}</ol>
+  });
 
-  const breadcrumb = screen.getByTestId(BREADCRUMB_TEST_ID);
+  it('Should render as default', () => {
+    render(<BreadcrumbSeparator data-testid='breadcrumb-separator' />);
+    const separator = screen.getByTestId('breadcrumb-separator');
+    expect(separator.getAttribute('data-direction')).toBe('right');
+    expect(separator.getAttribute('data-current')).toBe('false');
+    expect(separator.getAttribute('aria-hidden')).toBe('true');
+    expect(separator.getAttribute('role')).toBe('presentation');
+  });
 
-  expect(breadcrumb.classList.contains('custom')).toBeTruthy();
-  expect(breadcrumb.classList.contains(styles.breadcrumb)).toBeTruthy();
+  it('Should apply left direction ', () => {
+    render(<BreadcrumbSeparator data-testid='breadcrumb-separator' direction='left' />);
+    const separator = screen.getByTestId('breadcrumb-separator');
+    expect(separator.getAttribute('data-direction')).toBe('left');
+  });
+
+  it('Should apply current flag', () => {
+    render(<BreadcrumbSeparator current data-testid='breadcrumb-separator' />);
+    const separator = screen.getByTestId('breadcrumb-separator');
+    expect(separator.getAttribute('data-current')).toBe('true');
+  });
+
+  it('Should render custom children instead of the default icon', () => {
+    render(
+      <BreadcrumbSeparator data-testid='breadcrumb-separator'>
+        <span data-testid='custom-separator'>/</span>
+      </BreadcrumbSeparator>
+    );
+    expect(screen.getByTestId('custom-separator')).toBeTruthy();
+  });
+});
+
+describe('BreadcrumbEllipsis', () => {
+  testConformance(<BreadcrumbEllipsis />, {
+    tag: 'SPAN',
+    slot: 'breadcrumb-ellipsis',
+    rootClass: styles.breadcrumb_ellipsis
+  });
+
+  it('Should render as default', () => {
+    render(<BreadcrumbEllipsis data-testid='breadcrumb-ellipsis' />);
+    const ellipsis = screen.getByTestId('breadcrumb-ellipsis');
+    expect(ellipsis.getAttribute('aria-hidden')).toBe('true');
+    expect(ellipsis.getAttribute('role')).toBe('presentation');
+    expect(ellipsis.textContent).toContain('More');
+  });
 });

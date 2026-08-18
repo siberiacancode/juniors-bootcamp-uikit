@@ -27,11 +27,8 @@ export const NewPaymentCard = ({
       <span aria-hidden='true' className={styles.new_payment_card_icon}>
         <CirclePlusIcon />
       </span>
-      {!!children && (
-        <span className={styles.new_payment_card_label}>
-          <Slot.Slottable>{children}</Slot.Slottable>
-        </span>
-      )}
+
+      {!!children && <Slot.Slottable>{children}</Slot.Slottable>}
     </Component>
   );
 };

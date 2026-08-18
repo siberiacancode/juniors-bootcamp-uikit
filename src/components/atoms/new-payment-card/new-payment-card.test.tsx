@@ -1,59 +1,43 @@
 import { render, screen } from '@testing-library/react';
+import { expect, it, vi } from 'vitest';
 
+import { testConformance } from '../../../../tests/describe-conformance';
 import { NewPaymentCard } from './new-payment-card';
 
 import styles from './new-payment-card.module.css';
 
 const NEW_PAYMENT_CARD_TEST_ID = 'new-payment-card';
 
-it('Should render new payment card', () => {
-  render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID}>Новая карта</NewPaymentCard>);
-
-  const newPaymentCard = screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID);
-
-  expect(newPaymentCard.classList.contains(styles.new_payment_card)).toBeTruthy();
-  expect(newPaymentCard.getAttribute('data-slot')).toBe('new-payment-card');
-  expect(newPaymentCard.textContent).toBe('Новая карта');
+testConformance(<NewPaymentCard>Add card</NewPaymentCard>, {
+  tag: 'BUTTON',
+  slot: 'new-payment-card',
+  rootClass: styles.new_payment_card,
+  asChild: true,
+  asChildTag: 'a'
 });
 
-it('Should render custom text from children', () => {
-  render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID}>Добавить карту</NewPaymentCard>);
-
-  expect(screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID).textContent).toBe('Добавить карту');
+it('Should render as default', () => {
+  render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID}>Add card</NewPaymentCard>);
+  expect(screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID).textContent).toContain('Add card');
 });
 
-it('Should forward native attributes', () => {
+it('Should not render the label wrapper without children', () => {
+  const { container } = render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID} />);
+  expect(container.querySelector(`.${styles.new_payment_card_label}`)).toBeNull();
+});
+
+it('Should handle click', () => {
   const onClick = vi.fn();
-
-  render(
-    <NewPaymentCard
-      aria-label='Add card'
-      className='custom'
-      data-testid={NEW_PAYMENT_CARD_TEST_ID}
-      onClick={onClick}
-    />
-  );
-
-  const newPaymentCard = screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID);
-
-  newPaymentCard.click();
-
+  render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID} onClick={onClick} />);
+  screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID).click();
   expect(onClick).toHaveBeenCalledTimes(1);
-  expect(newPaymentCard.getAttribute('aria-label')).toBe('Add card');
-  expect(newPaymentCard.classList.contains('custom')).toBeTruthy();
 });
 
-it('Should render as child when asChild', () => {
-  render(
-    <NewPaymentCard asChild data-testid={NEW_PAYMENT_CARD_TEST_ID}>
-      <a href='/payment-cards/new'>Добавить карту</a>
-    </NewPaymentCard>
-  );
-
-  const newPaymentCard = screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID);
-
-  expect(newPaymentCard.tagName).toBe('A');
-  expect(newPaymentCard.getAttribute('href')).toBe('/payment-cards/new');
-  expect(newPaymentCard.getAttribute('type')).toBeNull();
-  expect(newPaymentCard.textContent).toBe('Добавить карту');
+it('Should be disabled', () => {
+  const onClick = vi.fn();
+  render(<NewPaymentCard disabled data-testid={NEW_PAYMENT_CARD_TEST_ID} onClick={onClick} />);
+  const card = screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID);
+  expect(card.hasAttribute('disabled')).toBeTruthy();
+  card.click();
+  expect(onClick).not.toHaveBeenCalled();
 });
