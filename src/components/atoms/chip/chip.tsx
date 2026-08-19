@@ -40,6 +40,7 @@ export const Chip = ({
   });
 
   const Comp = asChild ? Slot.Root : 'button';
+  const iconNode = icon === undefined ? <XIcon /> : icon;
 
   return (
     <Comp
@@ -59,7 +60,7 @@ export const Chip = ({
       {...props}
     >
       <Slot.Slottable>{children}</Slot.Slottable>
-      <span className={styles.icon}>{icon || <XIcon />}</span>
+      {iconNode && <span className={styles.icon}>{iconNode}</span>}
     </Comp>
   );
 };

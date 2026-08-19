@@ -59,7 +59,7 @@ export const Matrix = meta.story({
               <Chip disabled size={size} variant={variant}>
                 Chip
               </Chip>
-              <Chip defaultPressed disabled size={size} variant={variant}>
+              <Chip defaultPressed disabled icon={false} size={size} variant={variant}>
                 Chip
               </Chip>
             </div>

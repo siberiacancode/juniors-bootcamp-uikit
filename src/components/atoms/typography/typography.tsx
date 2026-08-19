@@ -69,7 +69,7 @@ export const Typography = <Tag extends TypographyTag = 'div'>({
   const Component = asChild ? Slot.Root : as;
   return (
     <Component
-      className={cn(styles.typography, styles[variant], className)}
+      className={cn(typographyVariants({ variant }), className)}
       data-slot='typography'
       data-variant={variant}
       {...(props as any)}

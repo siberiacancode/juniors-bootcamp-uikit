@@ -32,6 +32,22 @@ it('Should render as default', () => {
   expect(chip.getAttribute('type')).toBe('button');
 });
 
+it('Should render default icon', () => {
+  render(<Chip data-testid={CHIP_TEST_ID}>Chip</Chip>);
+  const chip = screen.getByTestId(CHIP_TEST_ID);
+  expect(chip.querySelector('svg')).toBeTruthy();
+});
+
+it('Should not render icon when icon is false', () => {
+  render(
+    <Chip data-testid={CHIP_TEST_ID} icon={false}>
+      Chip
+    </Chip>
+  );
+  const chip = screen.getByTestId(CHIP_TEST_ID);
+  expect(chip.querySelector('svg')).toBeNull();
+});
+
 VARIANTS.forEach((variant) => {
   it(`Should apply "${variant}" variant`, () => {
     render(

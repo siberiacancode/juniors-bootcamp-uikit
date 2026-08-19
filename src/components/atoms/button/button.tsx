@@ -7,6 +7,9 @@ import { Slot } from 'radix-ui';
 
 import styles from './button.module.css';
 
+export type ButtonVariant = 'ghost' | 'link' | 'outline' | 'primary' | 'secondary';
+export type ButtonSize = 'lg' | 'md' | 'sm';
+
 export const buttonVariants = cva(styles.button, {
   variants: {
     variant: {
@@ -24,7 +27,7 @@ export const buttonVariants = cva(styles.button, {
   },
   defaultVariants: {
     variant: 'primary',
-    size: 'lg'
+    size: 'md'
   }
 });
 
