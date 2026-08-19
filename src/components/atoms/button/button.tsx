@@ -7,7 +7,7 @@ import { Slot } from 'radix-ui';
 
 import styles from './button.module.css';
 
-const buttonVariants = cva(styles.button, {
+export const buttonVariants = cva(styles.button, {
   variants: {
     variant: {
       primary: styles.primary,

@@ -168,13 +168,13 @@ export const FieldSeparator = ({ children, className, ...props }: FieldSeparator
   </div>
 );
 
-export interface FieldErrorProps extends Omit<ComponentProps<'div'>, 'children'> {
+export interface FieldErrorProps extends ComponentProps<'div'> {
   error?: ReactNode;
 }
 
-export const FieldError = ({ className, error, ...props }: FieldErrorProps) => {
+export const FieldError = ({ children, className, error, ...props }: FieldErrorProps) => {
   const context = useFieldContext();
-  const content = error ?? context?.error;
+  const content = children ?? error ?? context?.error;
   if (!content) return null;
 
   return (

@@ -232,6 +232,15 @@ describe('FieldError', () => {
     expect(error.textContent).toContain('Required field');
   });
 
+  it('Should render children content', () => {
+    render(<FieldError data-testid={FIELD_ERROR_TEST_ID}>Required field</FieldError>);
+    const error = screen.getByTestId(FIELD_ERROR_TEST_ID);
+
+    expect(error.getAttribute('data-slot')).toBe('field-error');
+    expect(error.getAttribute('role')).toBe('alert');
+    expect(error.textContent).toContain('Required field');
+  });
+
   it('Should render error content from context', () => {
     render(
       <Field error='Context error'>
@@ -248,6 +257,15 @@ describe('FieldError', () => {
       </Field>
     );
     expect(screen.getByTestId(FIELD_ERROR_TEST_ID).textContent).toContain('Own error');
+  });
+
+  it('Should prefer children over the context error', () => {
+    render(
+      <Field error='Context error'>
+        <FieldError data-testid={FIELD_ERROR_TEST_ID}>Children error</FieldError>
+      </Field>
+    );
+    expect(screen.getByTestId(FIELD_ERROR_TEST_ID).textContent).toContain('Children error');
   });
 
   it('Should merge className', () => {
