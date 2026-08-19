@@ -11,26 +11,28 @@ export const typographyVariants = cva(styles.typography, {
     variant: {
       display: styles.display,
 
-      'heading-2xl': styles.heading2xl,
-      'heading-xl': styles.headingXl,
-      'heading-lg': styles.headingLg,
-      'heading-md': styles.headingMd,
+      'heading-2xl': styles['heading-2xl'],
+      'heading-xl': styles['heading-xl'],
+      'heading-lg': styles['heading-lg'],
+      'heading-md': styles['heading-md'],
 
-      'title-lg': styles.titleLg,
-      'title-md': styles.titleMd,
+      'title-lg': styles['title-lg'],
+      'title-md': styles['title-md'],
 
-      'body-lg': styles.bodyLg,
-      'body-md': styles.bodyMd,
-      'body-sm': styles.bodySm,
+      'body-lg': styles['body-lg'],
+      'body-md': styles['body-md'],
+      'body-sm': styles['body-sm'],
 
       link: styles.link,
       caption: styles.caption
     },
+
     pixelify: {
       true: styles.pixelify,
       false: null
     }
   },
+
   defaultVariants: {
     variant: 'body-md',
     pixelify: false

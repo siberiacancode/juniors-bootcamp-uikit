@@ -207,20 +207,19 @@
   --border-soft: var(--color-neutral-300);
 
   /* Form / focus */
-  --input: var(--color-neutral-100);
+  --input: var(--color-neutral-600);
 
   --ring: var(--color-neutral-400);
   --ring-error: var(--color-red-300);
 }
-
 :root.dark,
 :root[data-theme='dark'] {
   /* Surfaces & base */
-  --background: #0b0b0b;
+  --background: var(--color-neutral-900);
   --foreground: var(--color-neutral-50);
 
-  --surface: #171717;
-  --surface-foreground: var(--color-neutral-50);
+  --surface: var(--color-neutral-800);
+  --surface-foreground: var(--color-neutral-100);
 
   /* Primary */
   --primary: var(--color-neutral-100);
@@ -228,47 +227,49 @@
   --primary-foreground: var(--color-neutral-900);
 
   /* Secondary */
-  --secondary: #202020;
-  --secondary-hover: #262626;
+  --secondary: var(--color-neutral-800);
+  --secondary-hover: var(--color-neutral-700);
   --secondary-foreground: var(--color-neutral-50);
 
   /* Outline / ghost / muted */
-  --outline: #303030;
+  --outline: var(--color-neutral-700);
 
-  --ghost-hover: #202020;
+  --ghost-hover: var(--color-neutral-800);
   --ghost-foreground: var(--color-neutral-50);
 
-  --muted: #202020;
-  --muted-foreground: #a3a3a3;
+  --muted: var(--color-neutral-800);
+  --muted-foreground: var(--color-neutral-400);
 
   /* Accents */
   --accent-primary: var(--color-yellow-400);
-  --accent-primary-hover: var(--color-yellow-500);
+  --accent-primary-hover: var(--color-yellow-300);
 
   --accent-secondary: var(--color-violet-400);
   --accent-secondary-active: var(--color-violet-500);
 
-  --accent-tertiary: var(--color-orange-500);
-  --accent-quaternary: var(--color-pink-500);
-  --accent-quinary: var(--color-pink-600);
+  --accent-tertiary: var(--color-neutral-50);
+  --accent-quaternary: var(--color-orange-400);
+  --accent-quinary: var(--color-pink-400);
 
   --accent-senary: var(--color-olive-400);
-  --accent-senary-hover: var(--color-olive-500);
+  --accent-senary-hover: var(--color-olive-300);
 
-  --accent-foreground: var(--color-neutral-900);
+  --accent-septenary: var(--color-blue-400);
+
+  --accent-foreground: var(--color-neutral-50);
 
   /* Destructive */
-  --destructive-foreground: var(--color-red-400);
+  --destructive-foreground: var(--color-red-300);
   --destructive-background: var(--color-red-900);
-  --destructive-border: var(--color-red-400);
+  --destructive-border: var(--color-red-700);
 
   /* Borders */
-  --border-hard: #3a3a3a;
-  --border-soft: #303030;
+  --border-hard: var(--color-neutral-200);
+  --border-soft: var(--color-neutral-800);
 
   /* Form / focus */
-  --input: #262626;
+  --input: var(--color-neutral-700);
 
-  --ring: #525252;
-  --ring-error: var(--color-red-700);
+  --ring: var(--color-neutral-500);
+  --ring-error: var(--color-red-500);
 }
