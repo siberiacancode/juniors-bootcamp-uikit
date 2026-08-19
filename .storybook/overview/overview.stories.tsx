@@ -25,7 +25,7 @@ import { SavedPaymentCard } from '../../src/components/atoms/saved-payment-card/
 import { Textarea } from '../../src/components/atoms/textarea/textarea';
 import { Typography } from '../../src/components/atoms/typography/typography';
 import { TextInput } from '../../src/components/body/text-input/text-input';
-import { ThemeSwitcher } from '../../src/components/body/theme-switcher/theme-switcher';
+import { ThemeToggle } from '../../src/components/body/theme-toggle/theme-toggle';
 import { ChipGroup, ChipGroupItem } from '../../src/components/molecules/chip-group/chip-group';
 import { Field, FieldDescription, FieldLabel } from '../../src/components/molecules/field/field';
 import { GiantButton } from '../../src/components/molecules/giant-button/giant-button';
@@ -43,8 +43,7 @@ import styles from './overview.module.css';
 
 const OverviewThemeSwitcher = () => {
   const { value, set } = useTheme();
-
-  return <ThemeSwitcher aria-label='Theme' value={value} onValueChange={set} />;
+  return <ThemeToggle aria-label='Theme' value={value} onValueChange={set} />;
 };
 
 const OverviewShowcase = () => (

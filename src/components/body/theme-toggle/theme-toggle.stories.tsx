@@ -4,22 +4,22 @@ import type { Theme } from '../../../theme';
 
 import preview from '../../../../.storybook/preview';
 import { useTheme } from '../../../theme';
-import { ThemeSwitcher } from './theme-switcher';
+import { ThemeToggle } from './theme-toggle';
 
 const ThemeSwitcherControlled = ({ value: initialValue = 'system' }: { value?: Theme }) => {
   const [value, setValue] = useState<Theme>(initialValue);
 
-  return <ThemeSwitcher aria-label='Theme' value={value} onValueChange={setValue} />;
+  return <ThemeToggle aria-label='Theme' value={value} onValueChange={setValue} />;
 };
 
 const ThemeSwitcherWithProvider = () => {
   const { value, set } = useTheme();
 
-  return <ThemeSwitcher aria-label='Theme' value={value} onValueChange={set} />;
+  return <ThemeToggle aria-label='Theme' value={value} onValueChange={set} />;
 };
 
 const meta = preview.meta({
-  component: ThemeSwitcher,
+  component: ThemeToggle,
   tags: ['autodocs'],
   args: {
     value: 'system'
