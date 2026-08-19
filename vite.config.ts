@@ -4,7 +4,11 @@ import { defineConfig } from 'vite';
 import packageJson from './package.json';
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const dependencies = Object.keys(packageJson.dependencies ?? {});
+const dependencies = [
+  ...Object.keys(packageJson.dependencies ?? {}),
+  ...Object.keys(packageJson.peerDependencies ?? {})
+];
+
 const external = dependencies.flatMap((dependency) => [
   dependency,
   new RegExp(`^${escapeRegExp(dependency)}/`)

@@ -1,6 +1,6 @@
 {
   "name": "@siberiacancode/uikit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "description": "UI-kit for juniorsbootcamp",
   "author": {
@@ -56,6 +56,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "lefthook install || true"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@fontsource-variable/nunito": "^5.2.7",
