@@ -21,6 +21,13 @@ it('Should render as default', () => {
   expect(screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID).textContent).toContain('Add card');
 });
 
+it('Should render selected state', () => {
+  render(<NewPaymentCard selected data-testid={NEW_PAYMENT_CARD_TEST_ID} />);
+  const card = screen.getByTestId(NEW_PAYMENT_CARD_TEST_ID);
+  expect(card.getAttribute('aria-pressed')).toBe('true');
+  expect(card.getAttribute('data-state')).toBe('selected');
+});
+
 it('Should not render the label wrapper without children', () => {
   const { container } = render(<NewPaymentCard data-testid={NEW_PAYMENT_CARD_TEST_ID} />);
   expect(container.querySelector(`.${styles.new_payment_card_label}`)).toBeNull();

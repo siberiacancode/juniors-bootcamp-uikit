@@ -14,6 +14,13 @@ import {
 
 import styles from './breadcrumb.module.css';
 
+const BREADCRUMB_TEST_ID = 'breadcrumb';
+const BREADCRUMB_LINK_TEST_ID = 'breadcrumb-link';
+const BREADCRUMB_PAGE_TEST_ID = 'breadcrumb-page';
+const BREADCRUMB_SEPARATOR_TEST_ID = 'breadcrumb-separator';
+const BREADCRUMB_CUSTOM_SEPARATOR_TEST_ID = 'custom-separator';
+const BREADCRUMB_ELLIPSIS_TEST_ID = 'breadcrumb-ellipsis';
+
 describe('Breadcrumb', () => {
   testConformance(
     <Breadcrumb>
@@ -31,8 +38,8 @@ describe('Breadcrumb', () => {
   );
 
   it('Should render as default', () => {
-    render(<Breadcrumb data-testid='breadcrumb' />);
-    expect(screen.getByTestId('breadcrumb').getAttribute('aria-label')).toBe('breadcrumb');
+    render(<Breadcrumb data-testid={BREADCRUMB_TEST_ID} />);
+    expect(screen.getByTestId(BREADCRUMB_TEST_ID).getAttribute('aria-label')).toBe('breadcrumb');
   });
 });
 
@@ -69,11 +76,11 @@ describe('BreadcrumbLink', () => {
 
   it('Should forward the href', () => {
     render(
-      <BreadcrumbLink data-testid='breadcrumb-link' href='/home'>
+      <BreadcrumbLink data-testid={BREADCRUMB_LINK_TEST_ID} href='/home'>
         Home
       </BreadcrumbLink>
     );
-    expect(screen.getByTestId('breadcrumb-link').getAttribute('href')).toBe('/home');
+    expect(screen.getByTestId(BREADCRUMB_LINK_TEST_ID).getAttribute('href')).toBe('/home');
   });
 });
 
@@ -85,8 +92,8 @@ describe('BreadcrumbPage', () => {
   });
 
   it('Should mark the current page for assistive tech', () => {
-    render(<BreadcrumbPage data-testid='breadcrumb-page'>Current</BreadcrumbPage>);
-    const page = screen.getByTestId('breadcrumb-page');
+    render(<BreadcrumbPage data-testid={BREADCRUMB_PAGE_TEST_ID}>Current</BreadcrumbPage>);
+    const page = screen.getByTestId(BREADCRUMB_PAGE_TEST_ID);
     expect(page.getAttribute('aria-current')).toBe('page');
     expect(page.getAttribute('aria-disabled')).toBe('true');
     expect(page.getAttribute('role')).toBe('link');
@@ -102,8 +109,8 @@ describe('BreadcrumbSeparator', () => {
   });
 
   it('Should render as default', () => {
-    render(<BreadcrumbSeparator data-testid='breadcrumb-separator' />);
-    const separator = screen.getByTestId('breadcrumb-separator');
+    render(<BreadcrumbSeparator data-testid={BREADCRUMB_SEPARATOR_TEST_ID} />);
+    const separator = screen.getByTestId(BREADCRUMB_SEPARATOR_TEST_ID);
     expect(separator.getAttribute('data-direction')).toBe('right');
     expect(separator.getAttribute('data-current')).toBe('false');
     expect(separator.getAttribute('aria-hidden')).toBe('true');
@@ -111,24 +118,24 @@ describe('BreadcrumbSeparator', () => {
   });
 
   it('Should apply left direction ', () => {
-    render(<BreadcrumbSeparator data-testid='breadcrumb-separator' direction='left' />);
-    const separator = screen.getByTestId('breadcrumb-separator');
+    render(<BreadcrumbSeparator data-testid={BREADCRUMB_SEPARATOR_TEST_ID} direction='left' />);
+    const separator = screen.getByTestId(BREADCRUMB_SEPARATOR_TEST_ID);
     expect(separator.getAttribute('data-direction')).toBe('left');
   });
 
   it('Should apply current flag', () => {
-    render(<BreadcrumbSeparator current data-testid='breadcrumb-separator' />);
-    const separator = screen.getByTestId('breadcrumb-separator');
+    render(<BreadcrumbSeparator current data-testid={BREADCRUMB_SEPARATOR_TEST_ID} />);
+    const separator = screen.getByTestId(BREADCRUMB_SEPARATOR_TEST_ID);
     expect(separator.getAttribute('data-current')).toBe('true');
   });
 
   it('Should render custom children instead of the default icon', () => {
     render(
-      <BreadcrumbSeparator data-testid='breadcrumb-separator'>
-        <span data-testid='custom-separator'>/</span>
+      <BreadcrumbSeparator data-testid={BREADCRUMB_SEPARATOR_TEST_ID}>
+        <span data-testid={BREADCRUMB_CUSTOM_SEPARATOR_TEST_ID}>/</span>
       </BreadcrumbSeparator>
     );
-    expect(screen.getByTestId('custom-separator')).toBeTruthy();
+    expect(screen.getByTestId(BREADCRUMB_CUSTOM_SEPARATOR_TEST_ID)).toBeTruthy();
   });
 });
 
@@ -140,8 +147,8 @@ describe('BreadcrumbEllipsis', () => {
   });
 
   it('Should render as default', () => {
-    render(<BreadcrumbEllipsis data-testid='breadcrumb-ellipsis' />);
-    const ellipsis = screen.getByTestId('breadcrumb-ellipsis');
+    render(<BreadcrumbEllipsis data-testid={BREADCRUMB_ELLIPSIS_TEST_ID} />);
+    const ellipsis = screen.getByTestId(BREADCRUMB_ELLIPSIS_TEST_ID);
     expect(ellipsis.getAttribute('aria-hidden')).toBe('true');
     expect(ellipsis.getAttribute('role')).toBe('presentation');
     expect(ellipsis.textContent).toContain('More');

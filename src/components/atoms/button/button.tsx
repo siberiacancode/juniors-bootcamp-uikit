@@ -5,7 +5,7 @@ import { Slot } from 'radix-ui';
 
 import styles from './button.module.css';
 
-export type ButtonVariant = 'ghost' | 'outline' | 'primary' | 'secondary';
+export type ButtonVariant = 'ghost' | 'link' | 'outline' | 'primary' | 'secondary';
 export type ButtonSize = 'lg' | 'md' | 'sm';
 
 export interface ButtonProps extends ComponentProps<'button'> {

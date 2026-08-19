@@ -1,6 +1,6 @@
 {
   "name": "@siberiacancode/uikit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "description": "UI-kit for juniorsbootcamp",
   "author": {
@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "@fontsource-variable/nunito": "^5.2.7",
+    "@fontsource-variable/pixelify-sans": "^5.3.0",
     "@siberiacancode/reactuse": "^1.0.10",
     "lucide-react": "^1.24.0",
     "radix-ui": "^1.6.2",

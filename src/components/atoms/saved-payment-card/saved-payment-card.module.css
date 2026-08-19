@@ -1,31 +1,39 @@
 .saved_payment_card {
   box-sizing: border-box;
+
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
+
   width: 130px;
   height: 71px;
   padding: 8px;
-  border: 0;
+  gap: 16px;
+
+  border: 1px solid transparent;
   border-radius: 12px;
   outline: none;
-  background:
-    linear-gradient(
-      249.7deg,
-      color-mix(in srgb, var(--accent-secondary) 55%, var(--color-neutral-900)) 3.25%,
-      color-mix(in srgb, var(--accent-secondary) 73%, transparent) 54.67%,
-      color-mix(in srgb, var(--accent-secondary) 37%, var(--color-neutral-50)) 97.32%
-    ),
-    var(--accent-secondary);
-  color: var(--color-neutral-50);
+
+  background: linear-gradient(
+    249.7deg,
+    #472187 3.25%,
+    rgba(93, 44, 178, 0.733649) 54.67%,
+    rgba(124, 58, 237, 0.37) 97.32%
+  );
+  background-clip: padding-box;
+
+  color: #fbfbfb;
   font-family: var(--font-sans);
   cursor: pointer;
 }
 
+.saved_payment_card[data-state='selected'] {
+  border-color: var(--border-soft);
+}
+
 .saved_payment_card:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 70%, transparent);
+  box-shadow: 0 0 0 3px var(--ring);
 }
 
 .saved_payment_card:disabled {
@@ -34,33 +42,60 @@
 }
 
 .saved_payment_card_logo_wrapper {
+  box-sizing: border-box;
+
   display: inline-flex;
   flex: none;
   align-items: center;
   justify-content: center;
-  min-width: 33px;
+
   height: 20px;
   padding: 0 8px;
+
   border-radius: 9999px;
-  background: var(--color-neutral-900);
+
+  background: #0b0b0b;
 }
 
 .saved_payment_card_logo {
-  color: var(--color-neutral-50);
-  font-family: 'Pixelify Sans', var(--font-sans);
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.saved_payment_card_logo_text {
+  color: #fbfbfb;
+
+  font-family: 'Pixelify Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 14px;
   letter-spacing: 0.05em;
   text-transform: lowercase;
+
+  white-space: nowrap;
+}
+
+.saved_payment_card_row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  align-self: stretch;
+
+  gap: 4px;
 }
 
 .saved_payment_card_number {
-  align-self: stretch;
-  color: var(--color-neutral-50);
+  color: #fbfbfb;
+
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
   letter-spacing: 0.005em;
-  text-align: right;
+
+  white-space: nowrap;
 }

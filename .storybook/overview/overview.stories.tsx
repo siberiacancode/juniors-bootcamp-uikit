@@ -1,4 +1,11 @@
-import { ArrowRightIcon, BellIcon, CreditCardIcon, SearchIcon, SparklesIcon } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  BellIcon,
+  CreditCardIcon,
+  SearchIcon,
+  SparklesIcon,
+  XIcon
+} from 'lucide-react';
 
 import {
   Breadcrumb,
@@ -15,13 +22,20 @@ import { Empty, EmptyDescription, EmptyTitle } from '../../src/components/atoms/
 import { IconButton } from '../../src/components/atoms/icon-button/icon-button';
 import { NewPaymentCard } from '../../src/components/atoms/new-payment-card/new-payment-card';
 import { SavedPaymentCard } from '../../src/components/atoms/saved-payment-card/saved-payment-card';
+import { Textarea } from '../../src/components/atoms/textarea/textarea';
 import { Typography } from '../../src/components/atoms/typography/typography';
+import { TextInput } from '../../src/components/body/text-input/text-input';
+import { ThemeSwitcher } from '../../src/components/body/theme-switcher/theme-switcher';
 import { ChipGroup, ChipGroupItem } from '../../src/components/molecules/chip-group/chip-group';
+import { Field, FieldDescription, FieldLabel } from '../../src/components/molecules/field/field';
 import { GiantButton } from '../../src/components/molecules/giant-button/giant-button';
 import {
-  ThemeSwitcher,
-  ThemeSwitcherItem
-} from '../../src/components/molecules/theme-switcher/theme-switcher';
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupTextarea
+} from '../../src/components/molecules/input-group/input-group';
 import { ThemeProvider, useTheme } from '../../src/theme';
 import preview from '../preview';
 
@@ -30,13 +44,7 @@ import styles from './overview.module.css';
 const OverviewThemeSwitcher = () => {
   const { value, set } = useTheme();
 
-  return (
-    <ThemeSwitcher aria-label='Theme' value={value} onValueChange={set}>
-      <ThemeSwitcherItem aria-label='Light theme' value='light' />
-      <ThemeSwitcherItem aria-label='System theme' value='system' />
-      <ThemeSwitcherItem aria-label='Dark theme' value='dark' />
-    </ThemeSwitcher>
-  );
+  return <ThemeSwitcher aria-label='Theme' value={value} onValueChange={set} />;
 };
 
 const OverviewShowcase = () => (
@@ -50,162 +58,294 @@ const OverviewShowcase = () => (
             className={styles.logo_dark}
             src='brand/light-logo-full.png'
           />
+          <Typography className={styles.muted} variant='body-sm'>
+            Build your path. Learn by doing.
+          </Typography>
         </div>
+
         <OverviewThemeSwitcher />
       </div>
     </header>
 
     <div className={styles.grid}>
-      <section className={styles.tile}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Buttons
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            primary / outline / icon
-          </Typography>
-        </div>
-        <div className={styles.actions}>
-          <Button>Продолжить</Button>
-          <Button variant='outline'>Назад</Button>
-          <Button variant='ghost'>Пропустить</Button>
-        </div>
-        <div className={styles.icon_actions}>
-          <IconButton aria-label='Search' shape='round' variant='outline'>
-            <SearchIcon />
-          </IconButton>
-          <IconButton aria-label='Notifications' shape='round' variant='secondary'>
-            <BellIcon />
-          </IconButton>
-          <IconButton aria-label='Next' shape='round'>
-            <ArrowRightIcon />
-          </IconButton>
-        </div>
-      </section>
+      <div className={styles.column}>
+        <section className={styles.tile}>
+          <div className={styles.tile_header}>
+            <div className={styles.tile_heading}>
+              <Typography as='h2' variant='title-md'>
+                Complete your profile
+              </Typography>
+              <Typography className={styles.muted} variant='body-sm'>
+                Tell us a little about yourself before you start.
+              </Typography>
+            </div>
 
-      <section className={styles.tile}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Payment Cards
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            new / saved
-          </Typography>
-        </div>
-        <div className={styles.payment_cards}>
-          <NewPaymentCard aria-label='Add payment card'>Новая карта</NewPaymentCard>
-          <SavedPaymentCard aria-label='Saved payment card' />
-        </div>
-      </section>
+            <IconButton aria-label='Close' shape='round' variant='ghost'>
+              <XIcon />
+            </IconButton>
+          </div>
 
-      <section className={styles.tile_wide}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Breadcrumb
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            compound navigation
-          </Typography>
-        </div>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbSeparator direction='left' />
-            <BreadcrumbItem>
-              <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbEllipsis />
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href='#'>Components</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbSeparator current direction='left' />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </section>
+          <div className={styles.fields_column}>
+            <TextInput
+              asterisk
+              defaultValue='Dmitry'
+              id='overview-name'
+              label='Display name'
+              placeholder='Your name'
+            />
 
-      <section className={styles.tile_tall}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Typography
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            display / title / body
-          </Typography>
-        </div>
-        <div className={styles.type_stack}>
-          <Typography variant='heading-md'>Bootcamp</Typography>
-          <Typography variant='title-md'>Собираем интерфейсы без суеты</Typography>
-          <Typography className={styles.text} variant='body-sm'>
-            Набор базовых компонентов для продуктовых экранов, учебных проектов и внутренних
-            сервисов.
-          </Typography>
+            <TextInput
+              asterisk
+              defaultValue='hello'
+              error='Enter a valid email address.'
+              id='overview-email'
+              label='Email'
+            />
+          </div>
+
+          <div className={styles.footer_actions}>
+            <Button variant='ghost'>Skip</Button>
+            <Button>
+              Continue
+              <ArrowRightIcon />
+            </Button>
+          </div>
+        </section>
+
+        <section className={styles.tile}>
+          <div className={styles.tile_heading}>
+            <Typography as='h2' variant='title-md'>
+              Share your feedback
+            </Typography>
+            <Typography className={styles.muted} variant='body-sm'>
+              Help us make the bootcamp better.
+            </Typography>
+          </div>
+
+          <Field>
+            <FieldLabel htmlFor='overview-comment'>What can we improve?</FieldLabel>
+            <Textarea id='overview-comment' placeholder='Tell us about your experience...' />
+            <FieldDescription>Your feedback goes directly to the team.</FieldDescription>
+          </Field>
+
+          <Button variant='outline'>Send feedback</Button>
+        </section>
+
+        <section className={styles.tile}>
+          <div className={styles.tile_header}>
+            <div className={styles.tile_heading}>
+              <Typography as='h2' variant='title-md'>
+                Preferences
+              </Typography>
+              <Typography className={styles.muted} variant='body-sm'>
+                Customize your learning experience.
+              </Typography>
+            </div>
+
+            <IconButton aria-label='Notifications' shape='round' variant='ghost'>
+              <BellIcon />
+            </IconButton>
+          </div>
+
+          <div className={styles.preference_row}>
+            <div className={styles.preference_text}>
+              <Typography variant='body-sm'>Interface theme</Typography>
+              <Typography className={styles.muted} variant='caption'>
+                Choose how the platform looks.
+              </Typography>
+            </div>
+
+            <OverviewThemeSwitcher />
+          </div>
+
+          <div className={styles.section}>
+            <Typography variant='body-sm'>Learning topics</Typography>
+            <div className={styles.chips}>
+              <Chip defaultPressed>Frontend</Chip>
+              <Chip>Testing</Chip>
+              <Chip>Architecture</Chip>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className={styles.column}>
+        <section className={styles.tile}>
+          <div className={styles.tile_heading}>
+            <Typography as='h2' variant='title-md'>
+              Find your next course
+            </Typography>
+            <Typography className={styles.muted} variant='body-sm'>
+              Explore topics and start learning.
+            </Typography>
+          </div>
+
+          <Field>
+            <InputGroup>
+              <InputGroupAddon>
+                <SearchIcon />
+              </InputGroupAddon>
+              <InputGroupInput id='overview-search' placeholder='Search courses...' />
+            </InputGroup>
+          </Field>
+
+          <div className={styles.section}>
+            <Typography className={styles.muted} variant='caption'>
+              Popular topics
+            </Typography>
+            <div className={styles.chips}>
+              <Chip defaultPressed variant='accent'>
+                React
+              </Chip>
+              <Chip variant='primary'>TypeScript</Chip>
+              <Chip>CSS</Chip>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.tile}>
+          <div className={styles.tile_header}>
+            <div className={styles.tile_heading}>
+              <Typography as='h2' variant='title-md'>
+                Payment method
+              </Typography>
+              <Typography className={styles.muted} variant='body-sm'>
+                Choose how you want to pay.
+              </Typography>
+            </div>
+
+            <CreditCardIcon className={styles.header_icon} />
+          </div>
+
+          <div className={styles.payment_cards}>
+            <SavedPaymentCard selected aria-label='Saved payment card' />
+            <NewPaymentCard aria-label='Add payment card'>New card</NewPaymentCard>
+          </div>
+
+          <Button>Continue to payment</Button>
+        </section>
+
+        <section className={styles.tile}>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbSeparator direction='left' />
+              <BreadcrumbItem>
+                <BreadcrumbLink href='#'>Bootcamp</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbEllipsis />
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href='#'>React</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbSeparator current direction='left' />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Hooks</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <div className={styles.lesson_content}>
+            <Typography className={styles.muted} variant='caption'>
+              CURRENT LESSON
+            </Typography>
+            <Typography variant='heading-md'>Building reusable hooks</Typography>
+            <Typography className={styles.text} variant='body-sm'>
+              Learn how to separate behavior from UI and create hooks that stay predictable as your
+              application grows.
+            </Typography>
+          </div>
+
           <Typography as='a' href='#' variant='link'>
-            Открыть документацию
+            Continue lesson
           </Typography>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <section className={styles.tile}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Chips
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            single / multiple
-          </Typography>
-        </div>
-        <div className={styles.chips}>
-          <Chip defaultPressed variant='accent'>
-            Frontend
-          </Chip>
-          <Chip variant='primary'>React</Chip>
-          <Chip>CSS</Chip>
-        </div>
-        <ChipGroup defaultValue='junior' type='single'>
-          <ChipGroupItem value='junior'>Junior</ChipGroupItem>
-          <ChipGroupItem value='middle'>Middle</ChipGroupItem>
-        </ChipGroup>
-      </section>
+      <div className={styles.column}>
+        <section className={styles.tile}>
+          <div className={styles.tile_heading}>
+            <Typography as='h2' variant='title-md'>
+              Your experience
+            </Typography>
+            <Typography className={styles.muted} variant='body-sm'>
+              We'll use this to personalize your assignments.
+            </Typography>
+          </div>
 
-      <section className={styles.tile}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Giant Button
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            call to action
-          </Typography>
-        </div>
-        <div className={styles.giant_button_slot}>
-          <GiantButton>
-            Начать
-            <SparklesIcon />
-          </GiantButton>
-        </div>
-      </section>
+          <ChipGroup defaultValue='middle' type='single'>
+            <ChipGroupItem value='junior'>Junior</ChipGroupItem>
+            <ChipGroupItem value='middle'>Middle</ChipGroupItem>
+            <ChipGroupItem value='senior'>Senior</ChipGroupItem>
+          </ChipGroup>
 
-      <section className={styles.tile_wide}>
-        <div className={styles.tile_header}>
-          <Typography as='h2' variant='title-md'>
-            Empty State
-          </Typography>
-          <Typography className={styles.muted} variant='caption'>
-            title / description
-          </Typography>
-        </div>
-        <Empty className={styles.empty_preview}>
-          <CreditCardIcon aria-hidden='true' className={styles.empty_icon} />
-          <EmptyTitle>Пока ничего нет</EmptyTitle>
-          <EmptyDescription>Добавьте первую карту или выберите готовую.</EmptyDescription>
-        </Empty>
-      </section>
+          <Button>Save level</Button>
+        </section>
+
+        <section className={styles.tile}>
+          <div className={styles.tile_heading}>
+            <Typography as='h2' variant='title-md'>
+              Quick note
+            </Typography>
+            <Typography className={styles.muted} variant='body-sm'>
+              Save something for later.
+            </Typography>
+          </div>
+
+          <Field>
+            <InputGroup>
+              <InputGroupAddon align='block-start'>Note</InputGroupAddon>
+              <InputGroupTextarea id='overview-note' placeholder='Write a quick note...' />
+            </InputGroup>
+          </Field>
+
+          <Field>
+            <FieldLabel htmlFor='overview-tag'>Tag</FieldLabel>
+            <InputGroup>
+              <InputGroupAddon>
+                <SearchIcon />
+              </InputGroupAddon>
+              <InputGroupInput defaultValue='React' id='overview-tag' />
+              <InputGroupAddon align='inline-end'>
+                <InputGroupButton aria-label='Clear tag' size='icon-xs'>
+                  <XIcon />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+          </Field>
+        </section>
+
+        <section className={styles.tile}>
+          <Empty className={styles.empty_preview}>
+            <CreditCardIcon aria-hidden='true' className={styles.empty_icon} />
+            <EmptyTitle>No saved cards yet</EmptyTitle>
+            <EmptyDescription>Add a payment method to make your first purchase.</EmptyDescription>
+            <Button variant='outline'>Add payment method</Button>
+          </Empty>
+        </section>
+
+        <section className={`${styles.tile} ${styles.cta}`}>
+          <div className={styles.cta_content}>
+            <Typography className={styles.muted} variant='caption'>
+              READY WHEN YOU ARE
+            </Typography>
+            <Typography variant='title-md'>Start your first assignment</Typography>
+            <Typography className={styles.text} variant='body-sm'>
+              Everything is set up. Pick a task and start building.
+            </Typography>
+          </div>
+
+          <div className={styles.giant_button_slot}>
+            <GiantButton>
+              Start learning
+              <SparklesIcon />
+            </GiantButton>
+          </div>
+        </section>
+      </div>
     </div>
   </main>
 );

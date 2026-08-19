@@ -7,6 +7,15 @@
     format('woff2-variations');
 }
 
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('@fontsource-variable/pixelify-sans/files/pixelify-sans-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
 :root {
   --font-sans: 'Nunito', system-ui, sans-serif;
 
@@ -143,14 +152,15 @@
   --color-sky-900: #0c4a6e;
 
   /* ----------------------------------------------------------
-       SEMANTIC TOKENS — mapped to primitives
-       ---------------------------------------------------------- */
+     SEMANTIC TOKENS
+     ---------------------------------------------------------- */
 
   /* Surfaces & base */
   --background: var(--color-neutral-50);
   --foreground: var(--color-neutral-900);
-  --surface: var(--color-neutral-700);
-  --surface-foreground: var(--color-neutral-100);
+
+  --surface: var(--color-neutral-100);
+  --surface-foreground: var(--color-neutral-900);
 
   /* Primary */
   --primary: var(--color-neutral-900);
@@ -163,22 +173,28 @@
   --secondary-foreground: var(--color-neutral-900);
 
   /* Outline / ghost / muted */
-  --outline: var(--color-neutral-100);
+  --outline: var(--color-neutral-300);
+
   --ghost-hover: var(--color-neutral-100);
   --ghost-foreground: var(--color-neutral-900);
+
   --muted: var(--color-neutral-200);
-  --muted-foreground: var(--color-neutral-600);
+  --muted-foreground: var(--color-neutral-700);
 
   /* Accents */
   --accent-primary: var(--color-yellow-300);
   --accent-primary-hover: var(--color-yellow-400);
+
   --accent-secondary: var(--color-violet-500);
   --accent-secondary-active: var(--color-violet-400);
+
   --accent-tertiary: var(--color-neutral-900);
   --accent-quaternary: var(--color-orange-600);
   --accent-quinary: var(--color-pink-600);
+
   --accent-senary: var(--color-olive-600);
   --accent-senary-hover: var(--color-olive-500);
+
   --accent-foreground: var(--color-neutral-900);
 
   /* Destructive */
@@ -187,52 +203,76 @@
   --destructive-border: var(--color-red-500);
 
   /* Borders */
-  --border-hard: var(--color-neutral-900);
-  --border-soft: var(--color-neutral-700);
+  --border-hard: var(--color-neutral-400);
+  --border-soft: var(--color-neutral-300);
 
   /* Form / focus */
-  --ring: var(--color-neutral-300);
+  --input: var(--color-neutral-100);
+
+  --ring: var(--color-neutral-400);
   --ring-error: var(--color-red-300);
-  --input: var(--color-neutral-600);
 }
 
 :root.dark,
 :root[data-theme='dark'] {
-  --background: var(--color-neutral-900);
+  /* Surfaces & base */
+  --background: #0b0b0b;
   --foreground: var(--color-neutral-50);
-  --surface: var(--color-neutral-800);
-  --surface-foreground: var(--color-neutral-200);
 
+  /*
+   * Карточки должны быть лишь немного светлее page background.
+   * Не используем neutral-800 (#2e2e2e) — он слишком светлый.
+   */
+  --surface: #171717;
+  --surface-foreground: var(--color-neutral-50);
+
+  /* Primary */
   --primary: var(--color-neutral-100);
   --primary-hover: var(--color-neutral-200);
   --primary-foreground: var(--color-neutral-900);
 
-  --secondary: var(--color-neutral-800);
-  --secondary-hover: var(--color-neutral-700);
-  --secondary-foreground: var(--color-neutral-200);
+  /* Secondary */
+  --secondary: #202020;
+  --secondary-hover: #262626;
+  --secondary-foreground: var(--color-neutral-50);
 
-  --outline: var(--color-neutral-800);
-  --ghost-hover: var(--color-neutral-800);
+  /* Outline / ghost / muted */
+  --outline: #303030;
+
+  --ghost-hover: #202020;
   --ghost-foreground: var(--color-neutral-50);
-  --muted: var(--color-neutral-800);
-  --muted-foreground: var(--color-neutral-300);
 
+  --muted: #202020;
+  --muted-foreground: #a3a3a3;
+
+  /* Accents */
   --accent-primary: var(--color-yellow-400);
   --accent-primary-hover: var(--color-yellow-500);
+
   --accent-secondary: var(--color-violet-400);
   --accent-secondary-active: var(--color-violet-500);
+
   --accent-tertiary: var(--color-orange-500);
   --accent-quaternary: var(--color-pink-500);
+  --accent-quinary: var(--color-pink-600);
+
+  --accent-senary: var(--color-olive-400);
+  --accent-senary-hover: var(--color-olive-500);
+
   --accent-foreground: var(--color-neutral-900);
 
+  /* Destructive */
   --destructive-foreground: var(--color-red-400);
   --destructive-background: var(--color-red-900);
   --destructive-border: var(--color-red-400);
 
-  --border-hard: var(--color-neutral-300);
-  --border-soft: var(--color-neutral-500);
+  /* Borders */
+  --border-hard: #3a3a3a;
+  --border-soft: #303030;
 
-  --ring: var(--color-neutral-400);
+  /* Form / focus */
+  --input: #262626;
+
+  --ring: #525252;
   --ring-error: var(--color-red-700);
-  --input: var(--color-neutral-500);
 }

@@ -12,6 +12,7 @@ const VARIANTS: ChipVariant[] = ['default', 'primary', 'accent'];
 const SIZES: ChipSize[] = ['sm', 'md'];
 
 const CHIP_TEST_ID = 'chip';
+const CUSTOM_ICON_TEST_ID = 'custom-icon';
 
 testConformance(<Chip>Chip</Chip>, {
   tag: 'BUTTON',
@@ -116,11 +117,11 @@ it('Should stay controlled by prop', () => {
 
 it('Should render a custom icon', () => {
   render(
-    <Chip data-testid={CHIP_TEST_ID} icon={<svg data-testid='custom-icon' />}>
+    <Chip data-testid={CHIP_TEST_ID} icon={<svg data-testid={CUSTOM_ICON_TEST_ID} />}>
       Chip
     </Chip>
   );
-  expect(screen.getByTestId('custom-icon')).toBeTruthy();
+  expect(screen.getByTestId(CUSTOM_ICON_TEST_ID)).toBeTruthy();
 });
 
 it('Should handle click', () => {

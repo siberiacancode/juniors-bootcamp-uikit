@@ -17,6 +17,7 @@
     background-color 150ms ease,
     border-color 150ms ease,
     box-shadow 150ms ease,
+    text-decoration-color 150ms ease,
     opacity 150ms ease;
   outline: none;
   cursor: pointer;
@@ -86,6 +87,24 @@
 }
 .ghost:disabled {
   opacity: 0.4;
+}
+
+.link {
+  background: transparent;
+  color: var(--foreground);
+  text-decoration-line: none;
+}
+.link:hover,
+.link:active {
+  text-decoration-line: underline;
+}
+.link:focus-visible {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.link:disabled {
+  opacity: 0.4;
+  text-decoration-line: none;
 }
 
 .lg {

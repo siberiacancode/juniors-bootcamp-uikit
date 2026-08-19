@@ -9,6 +9,7 @@ import { axe } from 'vitest-axe';
 interface ConformanceOptions {
   asChild?: boolean;
   asChildTag?: keyof JSX.IntrinsicElements;
+  forwardsId?: boolean;
   rootClass: string;
   slot: string;
   tag: string;
@@ -18,7 +19,15 @@ interface ConformanceOptions {
 const CONFORMANCE_TEST_ID = 'conformance-root';
 
 export const testConformance = (element: ReactElement, options: ConformanceOptions) => {
-  const { tag, slot, rootClass, asChild = false, asChildTag = 'a', wrapper } = options;
+  const {
+    tag,
+    slot,
+    rootClass,
+    asChild = false,
+    asChildTag = 'a',
+    wrapper,
+    forwardsId = false
+  } = options;
 
   const cloneWithProps = (props: Record<string, unknown>) =>
     cloneElement(element as ReactElement<Record<string, unknown>>, props);
@@ -50,7 +59,7 @@ export const testConformance = (element: ReactElement, options: ConformanceOptio
       'aria-label': 'native-label'
     });
     const root = screen.getByTestId(CONFORMANCE_TEST_ID);
-    expect(root.getAttribute('id')).toBe('native-id');
+    if (!forwardsId) expect(root.getAttribute('id')).toBe('native-id');
     expect(root.getAttribute('aria-label')).toBe('native-label');
   });
 

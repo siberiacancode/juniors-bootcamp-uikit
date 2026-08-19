@@ -22,6 +22,13 @@ it('Should render as default', () => {
   expect(screen.getByTestId(SAVED_PAYMENT_CARD_TEST_ID).textContent).toContain('*0000');
 });
 
+it('Should render selected state', () => {
+  render(<SavedPaymentCard selected data-testid={SAVED_PAYMENT_CARD_TEST_ID} />);
+  const card = screen.getByTestId(SAVED_PAYMENT_CARD_TEST_ID);
+  expect(card.getAttribute('aria-pressed')).toBe('true');
+  expect(card.getAttribute('data-state')).toBe('selected');
+});
+
 it('Should render a custom pan suffix', () => {
   render(<SavedPaymentCard data-testid={SAVED_PAYMENT_CARD_TEST_ID} panSuffix='4242' />);
   expect(screen.getByTestId(SAVED_PAYMENT_CARD_TEST_ID).textContent).toContain('*4242');

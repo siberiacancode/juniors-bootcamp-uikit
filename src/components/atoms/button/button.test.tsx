@@ -8,7 +8,7 @@ import { Button } from './button';
 
 import styles from './button.module.css';
 
-const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'outline', 'ghost'];
+const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'outline', 'ghost', 'link'];
 const SIZES: ButtonSize[] = ['sm', 'md', 'lg'];
 
 const BUTTON_TEST_ID = 'button';

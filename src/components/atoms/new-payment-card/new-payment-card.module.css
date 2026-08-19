@@ -1,32 +1,47 @@
 .new_payment_card {
   box-sizing: border-box;
+
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+
   width: 130px;
   height: 71px;
   padding: 8px;
-  border: 0;
+
+  border: 1px solid transparent;
   border-radius: 12px;
   outline: none;
-  background: var(--color-neutral-50);
-  color: var(--foreground);
+
+  background: var(--background);
+  color: var(--secondary-foreground);
+
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
   letter-spacing: 0.005em;
+
   cursor: pointer;
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+}
+
+.new_payment_card[data-state='selected'] {
+  border-color: var(--border-soft);
 }
 
 .new_payment_card:hover {
-  background: var(--color-neutral-100);
+  background: var(--secondary-hover);
 }
 
 .new_payment_card:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 70%, transparent);
+  box-shadow: 0 0 0 3px var(--ring);
 }
 
 .new_payment_card:disabled {
@@ -39,30 +54,18 @@
   flex: none;
   align-items: center;
   justify-content: center;
+
   width: 32px;
   height: 32px;
+
   border-radius: 9999px;
+
+  color: currentColor;
 }
 
 .new_payment_card_icon :global(svg) {
   width: 20px;
   height: 20px;
-  stroke-width: 1.5;
-}
 
-.new_payment_card_label {
-  display: block;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  width: 84px;
-  height: 22px;
-  color: var(--color-neutral-900);
-  font-family: 'Nunito', var(--font-sans);
-  font-style: normal;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
-  letter-spacing: 0.005em;
-  text-align: center;
+  stroke-width: 1.5;
 }

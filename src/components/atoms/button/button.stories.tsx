@@ -13,7 +13,7 @@ const meta = preview.meta({
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'outline', 'ghost']
+      options: ['primary', 'secondary', 'outline', 'ghost', 'link']
     },
     size: {
       control: 'radio',
@@ -33,7 +33,7 @@ const meta = preview.meta({
 
 export const Playground = meta.story({});
 
-const VARIANTS = ['primary', 'secondary', 'outline', 'ghost'] as const;
+const VARIANTS = ['primary', 'secondary', 'outline', 'ghost', 'link'] as const;
 const SIZES = ['lg', 'md', 'sm'] as const;
 
 export const Matrix = meta.story({
